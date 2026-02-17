@@ -1,0 +1,84 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerMovement : MonoBehaviour
+{
+    [SerializeField]
+    private float Speed;
+
+    [SerializeField]
+    private float JumpForce;
+
+    [SerializeField]
+    public LayerMask groundLayer;
+
+    private Rigidbody2D _rb;
+    private PlayerInputAction inputActions;
+    private bool AttackPress = false;
+    private bool JumpWithGround = false;
+    private Vector2 Move;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        inputActions = new PlayerInputAction();
+
+        inputActions.Player.Move.performed += ctx => Move = ctx.ReadValue<Vector2>();
+        inputActions.Player.Move.canceled += ctx => Move = Vector2.zero;
+        inputActions.Player.Attack.performed += ctx => AttackPress = true;
+        inputActions.Player.Jump.performed += ctx => Jumped();
+    }
+
+    void OnEnable() => inputActions.Enable();
+    void OnDisable() => inputActions.Disable();
+
+    void Start()
+    {
+
+    }
+
+
+    void FixedUpdate()
+    {
+        IsGrounded();
+        Moved();
+       
+    }
+
+    void Moved()
+    { 
+        _rb.velocity = new Vector2(Speed * Move.x, _rb.velocity.y);
+    }
+
+    void Jumped()
+    {
+       if (JumpWithGround)
+       {
+          _rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+       }
+    }
+
+    /// <summary>
+    /// Стоит ли персонаж на платформе
+    /// </summary>
+    /// <returns></returns>
+    void IsGrounded()
+    {
+        JumpWithGround = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundLayer);       
+    }
+
+    /// <summary>
+    /// увидеть луч в scene
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Vector2 rayStart = transform.position;
+        Vector2 rayDirection = Vector2.down;
+        float rayLength = 1.1f;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawRay(rayStart, rayDirection * rayLength);
+    }
+}
