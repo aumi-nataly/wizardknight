@@ -61,8 +61,18 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.2.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Enemy\EnemyPoolData.cs" />
     <Compile Include="Assets\Script\CameraFollow.cs" />
+    <Compile Include="Assets\Script\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Script\Enemy\States\IdleState.cs" />
+    <Compile Include="Assets\Script\StateMachine.cs" />
     <Compile Include="Assets\Script\PlayerInputAction.cs" />
+    <Compile Include="Assets\Script\IState.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemyFactory.cs" />
+    <Compile Include="Assets\Script\Pool.cs" />
+    <Compile Include="Assets\Script\Enemy\SpawnerEnemy.cs" />
+    <Compile Include="Assets\Script\WorldStateManager.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemyType.cs" />
     <Compile Include="Assets\Script\PlayerMovement.cs" />
   </ItemGroup>
   <ItemGroup>
