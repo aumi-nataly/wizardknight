@@ -65,6 +65,7 @@
     <Compile Include="Assets\Script\CameraFollow.cs" />
     <Compile Include="Assets\Script\Enemy\Enemy.cs" />
     <Compile Include="Assets\Script\Enemy\States\IdleState.cs" />
+    <Compile Include="Assets\Script\Enemy\States\DetectionState.cs" />
     <Compile Include="Assets\Script\StateMachine.cs" />
     <Compile Include="Assets\Script\PlayerInputAction.cs" />
     <Compile Include="Assets\Script\IState.cs" />
