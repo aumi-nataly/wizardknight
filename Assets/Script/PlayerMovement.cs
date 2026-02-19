@@ -19,11 +19,14 @@ public class PlayerMovement : MonoBehaviour
     private bool AttackPress = false;
     private bool JumpWithGround = false;
     private Vector2 Move;
+    private Animator animator;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         inputActions = new PlayerInputAction();
+        GameObject girl = transform.GetChild(0).gameObject;
+        animator = girl.GetComponent<Animator>();
 
         inputActions.Player.Move.performed += ctx => Move = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled += ctx => Move = Vector2.zero;
@@ -43,8 +46,10 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         IsGrounded();
+        JumpAnimation();
         Moved();
-       
+        FlipCharacter();
+        RunAnimation();
     }
 
     void Moved()
@@ -54,11 +59,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Jumped()
     {
-        //if (JumpWithGround)
-        //{
-        //   _rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-        //}
-
         if (JumpWithGround)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, JumpForce);
@@ -85,5 +85,47 @@ public class PlayerMovement : MonoBehaviour
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawRay(rayStart, rayDirection * rayLength);
+    }
+
+    void JumpAnimation()
+    {
+        if (JumpWithGround)
+        {
+            animator.SetBool("Jumping", false);
+        }
+        else
+        {
+            animator.SetBool("Jumping", true);
+        }
+    }
+
+    void RunAnimation()
+    {
+        if (Move.x!=0)
+        {
+            animator.SetBool("Running", true);
+        }
+        else
+        {
+            animator.SetBool("Running", false);
+        }
+    }
+
+    void FlipCharacter()
+    {
+        Vector3 scale = transform.localScale;
+
+        if (Move.x > 0 && scale.x < 0)
+        {
+            // Движение вправо, но объект отражён — исправляем
+            scale.x = Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+        else if (Move.x < 0 && scale.x > 0)
+        {
+            // Движение влево, но объект не отражён — отражаем
+            scale.x = -Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
     }
 }
