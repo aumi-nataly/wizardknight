@@ -48,16 +48,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Moved()
-    { 
+    {
         _rb.velocity = new Vector2(Speed * Move.x, _rb.velocity.y);
     }
 
     void Jumped()
     {
-       if (JumpWithGround)
-       {
-          _rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-       }
+        //if (JumpWithGround)
+        //{
+        //   _rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+        //}
+
+        if (JumpWithGround)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, JumpForce);
+        }
     }
 
     /// <summary>
@@ -66,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     /// <returns></returns>
     void IsGrounded()
     {
-        JumpWithGround = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundLayer);       
+        JumpWithGround = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, groundLayer);       
     }
 
     /// <summary>
@@ -76,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 rayStart = transform.position;
         Vector2 rayDirection = Vector2.down;
-        float rayLength = 1.1f;
+        float rayLength = 0.6f;
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawRay(rayStart, rayDirection * rayLength);

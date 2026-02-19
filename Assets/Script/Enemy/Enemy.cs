@@ -40,8 +40,6 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void ReturnToStartLocation()
     {
-        lumineSleep = transform.Find("LumineSleep")?.gameObject;
-        lumineSleep.gameObject.SetActive(true);
 
         //решить что делать
         transform.position = _startLocation.position;
@@ -60,8 +58,6 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void SleepOff()
     {
-        lumineSleep = transform.Find("LumineSleep")?.gameObject;
-        lumineSleep.gameObject.SetActive(false);
 
     }
 
