@@ -107,6 +107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin_Thief
       objectReference: {fileID: 0}
+    - target: {fileID: 8724984631126280966, guid: fe9f6acd2d5879a45897a3c86a4a5a2d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e5c367cdc485f044e9f223df42ca796c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

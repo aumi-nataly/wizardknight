@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private float JumpForce;
 
     [SerializeField]
-    public LayerMask groundLayer;
+    private LayerMask groundLayer;
+
 
     private Rigidbody2D _rb;
     private PlayerInputAction inputActions;
@@ -48,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         IsGrounded();
         JumpAnimation();
         Moved();
+        AudioManager.instance.PlayRunPlayerSound(Move.x, JumpWithGround);
         FlipCharacter();
         RunAnimation();
     }
@@ -61,9 +64,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (JumpWithGround)
         {
+            AudioManager.instance.PlayJumpPlayerSound();
             _rb.velocity = new Vector2(_rb.velocity.x, JumpForce);
         }
     }
+
+  
 
     /// <summary>
     /// Стоит ли персонаж на платформе

@@ -1,0 +1,68 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AudioManager : MonoBehaviour
+{
+
+    [SerializeField]
+    private AudioClip jumpSoundClip;
+
+    [SerializeField]
+    private AudioClip runSoundClip;
+
+    private AudioSource audioPlayerSource;
+    private AudioSource audioRunPlayerSource;
+    public static AudioManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(instance);
+
+        audioPlayerSource = gameObject.AddComponent<AudioSource>();
+        audioPlayerSource.clip = jumpSoundClip;
+        audioPlayerSource.volume = 0.8f;
+
+        audioRunPlayerSource = gameObject.AddComponent<AudioSource>();
+        audioRunPlayerSource.clip = runSoundClip;
+        audioRunPlayerSource.loop = true;
+        audioRunPlayerSource.volume = 0.3f;
+        audioRunPlayerSource.pitch = 2f;
+
+    }
+
+    public void PlayJumpPlayerSound()
+    {
+        if (audioPlayerSource != null && jumpSoundClip != null)
+        {
+            audioPlayerSource.PlayOneShot(jumpSoundClip);
+        }
+    }
+
+
+    public void PlayRunPlayerSound(float speed, bool isGround)
+    {
+        if (audioRunPlayerSource != null && runSoundClip != null)
+        {
+            float currentSpeed = Mathf.Abs(speed);
+            bool shouldPlay = currentSpeed > 0.1 && isGround;
+
+            if (shouldPlay && !audioRunPlayerSource.isPlaying)
+            {
+                audioRunPlayerSource.Play();
+            }
+            else if (!shouldPlay && audioRunPlayerSource.isPlaying)
+            {
+                audioRunPlayerSource.Stop();
+            }
+
+        }
+    }
+
+}
