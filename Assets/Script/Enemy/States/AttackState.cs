@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectionState : IState
+public class AttackState : IState
 {
     private StateMachine _m;
     private Enemy _enemy;
+    private float detectionDistance = 15;
 
-    public DetectionState(StateMachine m, Enemy enemy)
+    public AttackState(StateMachine m, Enemy enemy)
     {
         _m = m;
         _enemy = enemy;
@@ -15,19 +16,16 @@ public class DetectionState : IState
 
     public void Enter()
     {
-        _enemy.Detection(true);
+        _enemy.GrowlEnemy();
     }
 
     public void Exit()
     {
-        _enemy.Detection(false);
+        
     }
 
     public void Tick()
     {
-        if (!_enemy.IsPlayerHereForAwakening())
-        {
-            _m.StateChange(new IdleState(_m, _enemy));
-        }
+        
     }
 }

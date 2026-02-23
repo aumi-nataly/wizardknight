@@ -66,11 +66,12 @@
     <Compile Include="Assets\Script\Enemy\Enemy.cs" />
     <Compile Include="Assets\Script\AudioManager.cs" />
     <Compile Include="Assets\Script\Enemy\States\IdleState.cs" />
-    <Compile Include="Assets\Script\Enemy\States\DetectionState.cs" />
     <Compile Include="Assets\Script\StateMachine.cs" />
+    <Compile Include="Assets\Script\Enemy\States\ApproachState.cs" />
     <Compile Include="Assets\Script\PlayerInputAction.cs" />
     <Compile Include="Assets\Script\IState.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyFactory.cs" />
+    <Compile Include="Assets\Script\Enemy\States\AttackState.cs" />
     <Compile Include="Assets\Script\Pool.cs" />
     <Compile Include="Assets\Script\Enemy\SpawnerEnemy.cs" />
     <Compile Include="Assets\Script\WorldStateManager.cs" />

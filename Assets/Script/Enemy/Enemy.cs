@@ -6,19 +6,25 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     public int MaxHealth;
+
+   
+    [SerializeField]
+    private float Speed;
+
+    [SerializeField]
+    private LayerMask groundLayer;
+
     private GameObject player;
 
     public int CurrentHealth;
 
     private StateMachine _m;
-    private Transform _startLocation;
-    private GameObject lumineSleep;
-   
+    public bool NeedReturning;
+
 
     private void Awake()
     {
         _m = new StateMachine();
-        _startLocation = GetComponent<Transform>();
 
     }
 
@@ -26,6 +32,7 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         _m.StateChange(new IdleState(_m, this));
+
     }
 
     private void Update()
@@ -34,23 +41,52 @@ public class Enemy : MonoBehaviour
     }
 
 
-
     /// <summary>
-    /// Вернуться врагу на стартовую позицию
+    /// Стоит ли враг на платформе
     /// </summary>
-    public void ReturnToStartLocation()
+    /// <returns></returns>
+    public bool IsGrounded()
     {
-
-        //решить что делать
-        transform.position = _startLocation.position;
+        var nV = new Vector2(transform.position.x + Speed, transform.position.y);
+        return Physics2D.Raycast(nV, Vector2.down, 0.6f, groundLayer);
     }
 
     /// <summary>
-    /// Враг спит
+    /// увидеть луч в scene
     /// </summary>
-    public void Sleep()
+    private void OnDrawGizmos()
     {
-        //звук сна
+        Vector2 rayStart = transform.position;
+        Vector2 rayDirection = Vector2.down;
+        float rayLength = 0.6f;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawRay(rayStart, rayDirection * rayLength);
+    }
+
+    /// <summary>
+    /// определить в какую сторону бежать за игроком:налево - направо
+    /// </summary>
+    public void DirectionOfMovement()
+    {
+
+        //игрок справа
+        if (transform.position.x <= player.transform.position.x)
+        {
+            Speed = Mathf.Abs(Speed);
+        }
+        else 
+        {
+            Speed = -1 * Mathf.Abs(Speed);
+        }
+    }
+
+    /// <summary>
+    /// Рык
+    /// </summary>
+    public void GrowlEnemy()
+    {
+        AudioManager.instance.PlayGrowlEnemy();
     }
 
     /// <summary>
@@ -58,27 +94,41 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void SleepOff()
     {
-
+        AudioManager.instance.PlayDetectionEnemy();
     }
 
     /// <summary>
-    /// Проверка как близок игрок для пробуждения/засыпания
+    /// Проверка как близок игрок для пробуждения/засыпания/атаки
     /// </summary>
     /// <returns></returns>
-    public bool IsPlayerHereForAwakening()
+    public bool IsPlayerHereForAwakening(float detectionDistance)
     {
         float distance = Vector2.Distance(transform.position, player.transform.position);
-        return distance < 5f;
+        return distance < detectionDistance;
     }
 
-    /// <summary>
-    /// Пробудиться - сменить подсветку
-    /// </summary>
-    public void Detection(bool turn)
+    public void Run()
     {
-        lumineSleep = transform.Find("LumineDetection")?.gameObject;
-        lumineSleep.gameObject.SetActive(turn);
-
+        FlipCharacter();
+        transform.Translate(Speed * Time.deltaTime, 0, 0, Space.World);
     }
 
+
+    void FlipCharacter()
+    {
+        Vector3 scale = transform.localScale;
+
+        if (Speed > 0 && scale.x < 0)
+        {
+            // Движение вправо, но объект отражён — исправляем
+            scale.x = Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+        else if (Speed < 0 && scale.x > 0)
+        {
+            // Движение влево, но объект не отражён — отражаем
+            scale.x = -Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+    }
 }

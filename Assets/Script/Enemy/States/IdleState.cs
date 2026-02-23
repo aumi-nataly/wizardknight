@@ -6,6 +6,7 @@ public class IdleState : IState
 {
     private StateMachine _m;
     private Enemy _enemy;
+    private float detectionDistance = 15;
 
     public IdleState(StateMachine m, Enemy enemy)
     {
@@ -16,22 +17,22 @@ public class IdleState : IState
 
     public void Enter()
     {
-        _enemy.ReturnToStartLocation();
- 
+        Debug.Log("IdleState Enter");
+        _enemy.NeedReturning = true;
     }
 
     public void Exit()
     {
         _enemy.SleepOff();
+        Debug.Log("IdleState Exit");
     }
 
     public void Tick()
     {
-        _enemy.Sleep();
 
-        if (_enemy.IsPlayerHereForAwakening())
+        if (_enemy.IsPlayerHereForAwakening(detectionDistance))
         {
-            _m.StateChange(new DetectionState(_m, _enemy));
+            _m.StateChange(new ApproachState(_m, _enemy));
         }
     }
 

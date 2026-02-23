@@ -11,8 +11,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioClip runSoundClip;
 
+    [SerializeField]
+    private AudioClip enemyDetectionSoundClip;
+
+    [SerializeField]
+    private AudioClip enemyGrowlSoundClip;
+
     private AudioSource audioPlayerSource;
     private AudioSource audioRunPlayerSource;
+    private AudioSource audioEnemyDetectionSource;
+    private AudioSource audioEnemyGrowlSource;
     public static AudioManager instance;
 
     private void Awake()
@@ -34,6 +42,15 @@ public class AudioManager : MonoBehaviour
         audioRunPlayerSource.loop = true;
         audioRunPlayerSource.volume = 0.3f;
         audioRunPlayerSource.pitch = 2f;
+
+        audioEnemyDetectionSource = gameObject.AddComponent<AudioSource>();
+        audioEnemyDetectionSource.clip = enemyDetectionSoundClip;
+        audioEnemyDetectionSource.volume = 0.8f;
+
+        audioEnemyGrowlSource = gameObject.AddComponent<AudioSource>();
+        audioEnemyGrowlSource.clip = enemyGrowlSoundClip;
+        audioEnemyGrowlSource.volume = 0.6f;
+        audioEnemyGrowlSource.pitch = 2f;
 
     }
 
@@ -62,6 +79,22 @@ public class AudioManager : MonoBehaviour
                 audioRunPlayerSource.Stop();
             }
 
+        }
+    }
+
+    public void PlayDetectionEnemy()
+    {
+        if (audioEnemyDetectionSource != null && enemyDetectionSoundClip != null)
+        {
+            audioEnemyDetectionSource.PlayOneShot(enemyDetectionSoundClip);
+        }
+    }
+
+    public void PlayGrowlEnemy()
+    {
+        if (audioEnemyGrowlSource != null && enemyDetectionSoundClip != null)
+        {
+            audioEnemyGrowlSource.PlayOneShot(enemyGrowlSoundClip);
         }
     }
 
