@@ -39,4 +39,9 @@ public  class FireBallManager : MonoBehaviour
 
         return fire;
     }
+
+    public void ReturnToPool(FireBall fire)
+    {
+        pool.ReturnToPool(fire.gameObject, fires);
+    }
 }

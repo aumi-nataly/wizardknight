@@ -7,10 +7,18 @@ public class FireBall : MonoBehaviour
     [SerializeField]
     private float Speed;
 
+    [SerializeField]
+    private float lifeTime = 2f;
 
     void Awake()
     {
  
+    }
+
+    private void Start()
+    {
+        // Запускаем таймер самоуничтожения
+        Invoke("DestroyBall", lifeTime);
     }
 
     public void DirectionBall(float dir)
@@ -23,13 +31,21 @@ public class FireBall : MonoBehaviour
         transform.Translate(Speed * Time.deltaTime, 0, 0);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Enemy"))
         { return; }
 
         Debug.Log("ранил");
 
-       // ReturnToPool();
+        FireBallManager.instance.ReturnToPool(this);
+
+        // Отменяем таймер, если столкнулись с врагом
+        CancelInvoke("DestroyBall");
+    }
+
+    private void DestroyBall()
+    {
+        FireBallManager.instance.ReturnToPool(this);
     }
 }
