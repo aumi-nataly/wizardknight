@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -47,13 +49,30 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+      
         IsGrounded();
         JumpAnimation();
         Moved();
         AudioManager.instance.PlayRunPlayerSound(Move.x, JumpWithGround);
         FlipCharacter();
-        RunAnimation();
+        RunAnimation(); 
+        Attack();
     }
+
+    void Attack()
+    {
+        animator.SetBool("Attacking", AttackPress);
+
+        if (AttackPress)
+        { 
+            var fire = FireBallManager.instance.GetFireBall(Mathf.Sign(transform.localScale.x));
+            
+        }
+        AttackPress = false;
+        
+    }
+
+   
 
     void Moved()
     {
@@ -101,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            AttackPress = false;
             animator.SetBool("Jumping", true);
         }
     }
@@ -109,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Move.x!=0)
         {
+            AttackPress = false;
             animator.SetBool("Running", true);
         }
         else
