@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -19,13 +20,14 @@ public class Enemy : MonoBehaviour
     public int CurrentHealth;
 
     private StateMachine _m;
-    public bool NeedReturning;
+
+    private Animator animator;
 
 
     private void Awake()
     {
         _m = new StateMachine();
-
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -109,10 +111,24 @@ public class Enemy : MonoBehaviour
 
     public void Run()
     {
+        animator.SetBool("RunningEnemy", true);
         FlipCharacter();
         transform.Translate(Speed * Time.deltaTime, 0, 0, Space.World);
     }
 
+    public void StopMoved()
+    {
+        animator.SetBool("RunningEnemy", false);
+    }
+
+    public void StopAttack()
+    {
+        animator.SetBool("AttackEnemy", false);
+    }
+    public void Attack()
+    {
+        animator.SetBool("AttackEnemy", true);
+    }
 
     void FlipCharacter()
     {

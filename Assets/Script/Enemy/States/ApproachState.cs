@@ -7,7 +7,7 @@ public class ApproachState : IState
     private StateMachine _m;
     private Enemy _enemy;
     private float detectionDistance = 15f;
-    private float attackDistance = 5f;
+    private float attackDistance = 3f;
 
     public ApproachState(StateMachine m, Enemy enemy)
     {
@@ -29,9 +29,14 @@ public class ApproachState : IState
     {
         _enemy.DirectionOfMovement();
 
+
         if (_enemy.IsGrounded())
         {
             _enemy.Run();
+        }
+        else 
+        {
+            _enemy.StopMoved();
         }
 
         if (!_enemy.IsPlayerHereForAwakening(detectionDistance))

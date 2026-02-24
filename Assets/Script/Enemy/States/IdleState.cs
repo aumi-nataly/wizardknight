@@ -17,14 +17,13 @@ public class IdleState : IState
 
     public void Enter()
     {
-        Debug.Log("IdleState Enter");
-        _enemy.NeedReturning = true;
+        _enemy.StopMoved();
+        Debug.Log("Вошли в IdleState");
     }
 
     public void Exit()
     {
         _enemy.SleepOff();
-        Debug.Log("IdleState Exit");
     }
 
     public void Tick()
