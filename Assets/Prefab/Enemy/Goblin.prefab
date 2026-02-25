@@ -47,12 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c55e68665ce45848a672b4eb2522d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 2
+  MaxHealth: 6
   Speed: 3
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  CurrentHealth: 2
+  CanReturnToPool: 0
 --- !u!61 &2419340971845524458
 BoxCollider2D:
   m_ObjectHideFlags: 0

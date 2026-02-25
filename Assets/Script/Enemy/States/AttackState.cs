@@ -28,6 +28,11 @@ public class AttackState : IState
     {
         _enemy.Attack();
 
+        if (_enemy.IsDeading())
+        {
+            _m.StateChange(new DeadState(_m, _enemy));
+        }
+
         if (!_enemy.IsPlayerHereForAwakening(attackDistance))
         {
             _m.StateChange(new ApproachState(_m, _enemy));

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
@@ -6,9 +7,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    public int MaxHealth;
+    private float MaxHealth;
 
-   
     [SerializeField]
     private float Speed;
 
@@ -17,17 +17,35 @@ public class Enemy : MonoBehaviour
 
     private GameObject player;
 
-    public int CurrentHealth;
+    private float CurrentHealth;
 
     private StateMachine _m;
 
     private Animator animator;
 
+    private bool isDead;
+    public bool CanReturnToPool;
 
     private void Awake()
     {
         _m = new StateMachine();
         animator = GetComponentInChildren<Animator>();
+        CurrentHealth = MaxHealth;
+
+        Debug.Log("Start CurrentHealth =" + CurrentHealth);
+    }
+
+
+    private void OnEnable()
+    {
+
+        FireBall.FireBallHitted += UpdateHealthEnemy;
+    }
+
+    private void OnDisable()
+    {
+
+        FireBall.FireBallHitted -= UpdateHealthEnemy;
     }
 
     private void Start()
@@ -40,6 +58,45 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         _m.Tick();
+    }
+
+
+    private void UpdateHealthEnemy(float hit)
+    {
+        CurrentHealth = CurrentHealth - hit;
+
+        Debug.Log("Upd CurrentHealth =" + CurrentHealth);
+
+        if (CurrentHealth <= 0)
+        {
+            isDead = true;
+        }
+    }
+
+    public float AnimationDead()
+    {
+        animator.SetBool("DeadingEnemy", true);
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.length;
+    }
+
+    public bool IsDeading()
+    {
+        return isDead;
+    }
+
+
+    public void Die()
+    {
+       StartCoroutine(DieWithAnimation());
+    }
+
+    private IEnumerator DieWithAnimation()
+    {
+        float animationLength = AnimationDead();
+        yield return new WaitForSeconds(animationLength);
+
+        CanReturnToPool = true;
     }
 
 

@@ -25,10 +25,7 @@ public class EnemyFactory : MonoBehaviour
     {
         var curPool = dicPoolEnemies[enemyType];
         var obj = poolData.GetFromPool(curPool);
-
         var propertyEnemy = obj.GetComponent<Enemy>();
-        propertyEnemy.CurrentHealth = propertyEnemy.MaxHealth;
-
         return obj;
     }
 

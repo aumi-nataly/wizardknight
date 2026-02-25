@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,11 @@ public class FireBall : MonoBehaviour
 
     [SerializeField]
     private float lifeTime = 2f;
+
+    [SerializeField]
+    private float powerFire;
+
+    public static event Action<float> FireBallHitted;
 
     void Awake()
     {
@@ -36,9 +42,8 @@ public class FireBall : MonoBehaviour
         if (!other.CompareTag("Enemy"))
         { return; }
 
-        Debug.Log("ранил");
-
         FireBallManager.instance.ReturnToPool(this);
+        FireBallHitted?.Invoke(powerFire);
 
         // Отменяем таймер, если столкнулись с врагом
         CancelInvoke("DestroyBall");

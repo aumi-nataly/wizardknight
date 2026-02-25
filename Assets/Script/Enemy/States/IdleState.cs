@@ -29,6 +29,11 @@ public class IdleState : IState
     public void Tick()
     {
 
+        if (_enemy.IsDeading())
+        {
+            _m.StateChange(new DeadState(_m, _enemy));
+        }
+
         if (_enemy.IsPlayerHereForAwakening(detectionDistance))
         {
             _m.StateChange(new ApproachState(_m, _enemy));

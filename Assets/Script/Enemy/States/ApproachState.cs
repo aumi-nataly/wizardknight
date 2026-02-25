@@ -30,6 +30,11 @@ public class ApproachState : IState
         _enemy.DirectionOfMovement();
 
 
+        if (_enemy.IsDeading())
+        {
+            _m.StateChange(new DeadState(_m, _enemy));
+        }
+
         if (_enemy.IsGrounded())
         {
             _enemy.Run();

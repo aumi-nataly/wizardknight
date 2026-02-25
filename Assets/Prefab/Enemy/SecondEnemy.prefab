@@ -187,9 +187,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c55e68665ce45848a672b4eb2522d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 5
-  player: {fileID: 3818546927518317457, guid: 939c94c6a4cf1754d96edc51625097da, type: 3}
-  CurrentHealth: 0
+  MaxHealth: 10
+  Speed: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  CanReturnToPool: 0
 --- !u!1 &8025727132417668537
 GameObject:
   m_ObjectHideFlags: 0
