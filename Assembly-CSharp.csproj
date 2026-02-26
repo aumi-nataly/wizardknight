@@ -69,9 +69,11 @@
     <Compile Include="Assets\Script\Player\FireBall.cs" />
     <Compile Include="Assets\Script\StateMachine.cs" />
     <Compile Include="Assets\Script\Enemy\States\ApproachState.cs" />
+    <Compile Include="Assets\Script\Player\PlayerHitted.cs" />
     <Compile Include="Assets\Script\Player\FireBallManager.cs" />
     <Compile Include="Assets\Script\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Script\PlayerInputAction.cs" />
+    <Compile Include="Assets\Script\Player\PlayerManager.cs" />
     <Compile Include="Assets\Script\IState.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyFactory.cs" />
     <Compile Include="Assets\Script\Enemy\States\AttackState.cs" />

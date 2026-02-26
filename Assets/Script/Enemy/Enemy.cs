@@ -32,7 +32,6 @@ public class Enemy : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         CurrentHealth = MaxHealth;
 
-        Debug.Log("Start CurrentHealth =" + CurrentHealth);
     }
 
 
@@ -64,8 +63,6 @@ public class Enemy : MonoBehaviour
     private void UpdateHealthEnemy(float hit)
     {
         CurrentHealth = CurrentHealth - hit;
-
-        Debug.Log("Upd CurrentHealth =" + CurrentHealth);
 
         if (CurrentHealth <= 0)
         {
