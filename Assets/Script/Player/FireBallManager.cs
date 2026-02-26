@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public  class FireBallManager : MonoBehaviour
+public class FireBallManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject fireballPrefab;

@@ -22,6 +22,7 @@ public class SpawnerEnemy : MonoBehaviour
     private GameObject enemy;
 
     private Enemy concreteEnemy;
+    private bool _isEnemyDead;
 
     // Метод для спавна врага
     private void SpawnEnemy()
@@ -40,6 +41,7 @@ public class SpawnerEnemy : MonoBehaviour
         enemy.transform.position = transform.position;
 
         concreteEnemy = enemy.GetComponent<Enemy>();
+        _isEnemyDead = false;
 
     }
 
@@ -47,6 +49,7 @@ public class SpawnerEnemy : MonoBehaviour
     {
         enemyFactory.ReturnEnemyToPool(spawnType,enemy);
         enemy = null;
+        concreteEnemy = null;
     }
 
 
@@ -66,15 +69,19 @@ public class SpawnerEnemy : MonoBehaviour
             return;
         }
 
-        UpdateDeadEnemy();
+        if (concreteEnemy != null && concreteEnemy.IsReadyToDespawn())
+        {
+            UpdateDeadEnemy();
+            return;
+        }
     }
 
     
     private void UpdateDeadEnemy()
     {
-         if (!concreteEnemy.CanReturnToPool)
-            return;
+        if (_isEnemyDead) return; // Уже обработан
 
+        _isEnemyDead = true;
         WorldStateManager.Instance.AddDeathEnemy(SpawnerId);
         DespawnEnemy();
         Debug.Log("умер проивник номер "+ SpawnerId);

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SecondEnemyPoolData
   m_EditorClassIdentifier: 
   enemyType: 1
-  prefab: {fileID: 3139735619381310489, guid: d7f5e830be4f5024597ca42f4131930a, type: 3}
+  prefab: {fileID: 5467842450408356587, guid: 4fc71771c3df75840b8e539fcdaa6abf, type: 3}
   count: 5

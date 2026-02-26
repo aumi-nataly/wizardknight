@@ -20,24 +20,23 @@ public class Enemy : MonoBehaviour
     private float CurrentHealth;
 
     private StateMachine _m;
-
     private Animator animator;
-
     private bool isDead;
-    public bool CanReturnToPool;
+    private bool _isReadyToDespawn;
+
 
     private void Awake()
     {
         _m = new StateMachine();
         animator = GetComponentInChildren<Animator>();
         CurrentHealth = MaxHealth;
-
+        
     }
 
 
     private void OnEnable()
     {
-
+        _isReadyToDespawn = false;
         FireBall.FireBallHitted += UpdateHealthEnemy;
     }
 
@@ -51,7 +50,6 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         _m.StateChange(new IdleState(_m, this));
-
     }
 
     private void Update()
@@ -60,8 +58,11 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void UpdateHealthEnemy(float hit)
-    {
+    private void UpdateHealthEnemy(float hit, Enemy targetEnemy)
+    {      
+        
+        if (targetEnemy != this) return;
+
         CurrentHealth = CurrentHealth - hit;
 
         if (CurrentHealth <= 0)
@@ -82,7 +83,9 @@ public class Enemy : MonoBehaviour
         return isDead;
     }
 
-
+    /// <summary>
+    /// Вызывается в состояние смерти
+    /// </summary>
     public void Die()
     {
        StartCoroutine(DieWithAnimation());
@@ -93,9 +96,10 @@ public class Enemy : MonoBehaviour
         float animationLength = AnimationDead();
         yield return new WaitForSeconds(animationLength);
 
-        CanReturnToPool = true;
+        _isReadyToDespawn = true;
     }
 
+    public bool IsReadyToDespawn() => _isReadyToDespawn;
 
     /// <summary>
     /// Стоит ли враг на платформе

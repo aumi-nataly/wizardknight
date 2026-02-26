@@ -17,12 +17,12 @@ public class ApproachState : IState
 
     public void Enter()
     {
-        Debug.Log("ApproachState Enter");
+      
     }
 
     public void Exit()
     {
-        Debug.Log("ApproachState Exit");
+   
     }
 
     public void Tick()

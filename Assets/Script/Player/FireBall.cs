@@ -14,7 +14,7 @@ public class FireBall : MonoBehaviour
     [SerializeField]
     private float powerFire;
 
-    public static event Action<float> FireBallHitted;
+    public static event Action<float, Enemy> FireBallHitted;
 
     void Awake()
     {
@@ -42,8 +42,10 @@ public class FireBall : MonoBehaviour
         if (!other.CompareTag("Enemy"))
         { return; }
 
+        Enemy enemy = other.GetComponent<Enemy>();
+        FireBallHitted?.Invoke(powerFire, enemy);
         FireBallManager.instance.ReturnToPool(this);
-        FireBallHitted?.Invoke(powerFire);
+        
 
         // Отменяем таймер, если столкнулись с врагом
         CancelInvoke("DestroyBall");

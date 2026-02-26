@@ -18,7 +18,6 @@ public class IdleState : IState
     public void Enter()
     {
         _enemy.StopMoved();
-        Debug.Log("Вошли в IdleState");
     }
 
     public void Exit()
@@ -35,7 +34,7 @@ public class IdleState : IState
         }
 
         if (_enemy.IsPlayerHereForAwakening(detectionDistance))
-        {
+           {
             _m.StateChange(new ApproachState(_m, _enemy));
         }
     }
