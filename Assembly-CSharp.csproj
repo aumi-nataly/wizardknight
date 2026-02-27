@@ -80,6 +80,7 @@
     <Compile Include="Assets\Script\Player\PlayerManager.cs" />
     <Compile Include="Assets\Script\IState.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyFactory.cs" />
+    <Compile Include="Assets\Script\Screen and Menu\LifeUI.cs" />
     <Compile Include="Assets\Script\Enemy\States\AttackState.cs" />
     <Compile Include="Assets\Script\Regeneration\WorldStateManager.cs" />
     <Compile Include="Assets\Script\Pool.cs" />

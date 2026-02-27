@@ -41,12 +41,10 @@ public class PlayerManager : MonoBehaviour
         return stateInfo.length;
     }
 
-    /// <summary>
-    /// Вызывается в состояние смерти
-    /// </summary>
     public void Hurt()
     {
         StartCoroutine(HurtWithAnimation());
+        WorldStateManager.Instance.MinusLife(1);
     }
 
     private IEnumerator HurtWithAnimation()

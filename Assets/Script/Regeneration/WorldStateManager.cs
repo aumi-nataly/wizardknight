@@ -7,6 +7,9 @@ public class WorldStateManager : MonoBehaviour
     [SerializeField]
     private ScreenGameUI screen;
 
+    [SerializeField]
+    private LifeUI lifeUI;
+
     public static WorldStateManager Instance;
     private HashSet<int> DeadEnemy = new HashSet<int>();
     private HashSet<int> СollectedBonus = new HashSet<int>();
@@ -33,6 +36,13 @@ public class WorldStateManager : MonoBehaviour
     public void AddLife(int amount)
     {
         SumLife += amount;
+        lifeUI.UpdateAmountLifeFlowers(SumLife);
+    }
+
+    public void MinusLife(int amount)
+    {
+        SumLife -= amount;
+        lifeUI.UpdateAmountLifeFlowers(SumLife);
     }
 
     public void AddMoney(int amount)

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 5e9f6c5c822ddf249ad13f5c6936b197
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - flowerLifPrefab: {fileID: 6229012011734007696, guid: 70bc5721a31d7c64fa7032943308b088, type: 3}
+  - container: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
