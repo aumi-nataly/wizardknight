@@ -21,6 +21,7 @@ public class Bonus : MonoBehaviour
                 WorldStateManager.Instance.AddLife(1);
                 break;
             case BonusType.BonusMoney:
+                AudioManager.instance.PlayGetFlower();
                 WorldStateManager.Instance.AddMoney(1);
                 break;
             default:

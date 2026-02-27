@@ -23,7 +23,8 @@ public class WorldStateManager : MonoBehaviour
         {
          Destroy(gameObject);
         }
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void AddLife(int amount)

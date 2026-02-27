@@ -26,6 +26,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioClip HappyGetLifeSoundClip;
 
+    [SerializeField]
+    private AudioClip GetFlowerSoundClip;
+
     private AudioSource audioPlayerSource;
     private AudioSource audioRunPlayerSource;
     private AudioSource audioEnemyDetectionSource;
@@ -33,6 +36,7 @@ public class AudioManager : MonoBehaviour
     private AudioSource playerHittedSource;
     private AudioSource TreeSource;
     private AudioSource HappyGetLifeSource;
+    private AudioSource GetFlowerSource;
 
     public static AudioManager instance;
 
@@ -75,6 +79,10 @@ public class AudioManager : MonoBehaviour
         HappyGetLifeSource = gameObject.AddComponent<AudioSource>();
         HappyGetLifeSource.clip = HappyGetLifeSoundClip;
         HappyGetLifeSource.volume = 0.8f;
+
+        GetFlowerSource = gameObject.AddComponent<AudioSource>();
+        GetFlowerSource.clip = GetFlowerSoundClip;
+        GetFlowerSource.volume = 0.8f;
 
     }
 
@@ -142,6 +150,14 @@ public class AudioManager : MonoBehaviour
         if (HappyGetLifeSource != null && HappyGetLifeSoundClip != null)
         {
             HappyGetLifeSource.PlayOneShot(HappyGetLifeSoundClip);
+        }
+    }
+
+    public void PlayGetFlower()
+    {
+        if (GetFlowerSource != null && GetFlowerSoundClip != null)
+        {
+            GetFlowerSource.PlayOneShot(GetFlowerSoundClip);
         }
     }
 
