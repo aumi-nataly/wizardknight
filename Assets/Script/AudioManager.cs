@@ -17,10 +17,19 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioClip enemyGrowlSoundClip;
 
+    [SerializeField]
+    private AudioClip playerHittedSoundClip;
+
+    [SerializeField]
+    private AudioClip TreeSoundClip;
+
     private AudioSource audioPlayerSource;
     private AudioSource audioRunPlayerSource;
     private AudioSource audioEnemyDetectionSource;
     private AudioSource audioEnemyGrowlSource;
+    private AudioSource playerHittedSource;
+    private AudioSource TreeSource;
+
     public static AudioManager instance;
 
     private void Awake()
@@ -51,6 +60,13 @@ public class AudioManager : MonoBehaviour
         audioEnemyGrowlSource.clip = enemyGrowlSoundClip;
         audioEnemyGrowlSource.volume = 0.6f;
         audioEnemyGrowlSource.pitch = 2f;
+
+        playerHittedSource = gameObject.AddComponent<AudioSource>();
+        playerHittedSource.clip = playerHittedSoundClip;
+        playerHittedSource.volume = 0.8f;
+
+        TreeSource = gameObject.AddComponent<AudioSource>();
+        TreeSource.clip = TreeSoundClip;
 
     }
 
@@ -95,6 +111,21 @@ public class AudioManager : MonoBehaviour
         if (audioEnemyGrowlSource != null && enemyDetectionSoundClip != null)
         {
             audioEnemyGrowlSource.PlayOneShot(enemyGrowlSoundClip);
+        }
+    }
+
+    public void PlayPlayerHitted()
+    {
+        if (playerHittedSource != null && playerHittedSoundClip != null)
+        {
+            playerHittedSource.PlayOneShot(playerHittedSoundClip);
+        }
+    }
+    public void PlayTreeLoader()
+    {
+        if (TreeSource != null && TreeSoundClip != null)
+        {
+            TreeSource.PlayOneShot(TreeSoundClip);
         }
     }
 

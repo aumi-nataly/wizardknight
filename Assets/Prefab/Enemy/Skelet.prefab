@@ -48,11 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 8
   Speed: 3
-  fireBall: {fileID: 643653291730074352, guid: 1bc6603e7c4316a4d82ecc501e27cc69, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  CanReturnToPool: 0
 --- !u!61 &6454249315697344934
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -87,7 +85,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.73, y: 1.64}
+  m_Offset: {x: 0.93, y: 1.64}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -97,7 +95,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.2, y: 3.2}
+  m_Size: {x: 3.86, y: 3.2}
   m_EdgeRadius: 0
 --- !u!1001 &5292999683768389431
 PrefabInstance:

@@ -85,7 +85,15 @@
     <Compile Include="Assets\Script\Enemy\EnemyType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\readme_ja.txt" />
+    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\03_man\Voice actor information.txt" />
+    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\04_woman\Voice actor information.txt" />
+    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\06_old_woman\Voice actor information.txt" />
+    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\readme_en.txt" />
+    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\05_old_man\Voice actor information.txt" />
+    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\02_girl\Voice actor information.txt" />
     <None Include="Assets\karsiori\Pixel Art Tree Pack\Pixel Art Tree Pack - Read Me.txt" />
+    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\01_boy\Voice actor information.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
