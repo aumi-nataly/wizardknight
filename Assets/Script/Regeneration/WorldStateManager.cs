@@ -13,14 +13,16 @@ public class WorldStateManager : MonoBehaviour
     public static WorldStateManager Instance;
     private HashSet<int> DeadEnemy = new HashSet<int>();
     private HashSet<int> СollectedBonus = new HashSet<int>();
-    private int SumLife;
+    private int CurrentLife;
     private int SumMoney;
+    private int MaxLifeHave;
 
     private void Awake()
     {
         if (Instance == null)
         {
-            SumLife = 1;
+            CurrentLife = 1;
+            MaxLifeHave = 1;
             SumMoney = 0;
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -35,14 +37,15 @@ public class WorldStateManager : MonoBehaviour
 
     public void AddLife(int amount)
     {
-        SumLife += amount;
-        lifeUI.UpdateAmountLifeFlowers(SumLife);
+        CurrentLife += amount;
+        MaxLifeHave = CurrentLife;
+        lifeUI.UpdateAmountLifeFlowers(CurrentLife);
     }
 
     public void MinusLife(int amount)
     {
-        SumLife -= amount;
-        lifeUI.UpdateAmountLifeFlowers(SumLife);
+        CurrentLife -= amount;
+        lifeUI.UpdateAmountLifeFlowers(CurrentLife);
     }
 
     public void AddMoney(int amount)
@@ -93,5 +96,7 @@ public class WorldStateManager : MonoBehaviour
     public void ResetWorld()
     {
         DeadEnemy.Clear();
+        CurrentLife = MaxLifeHave;
+        lifeUI.UpdateAmountLifeFlowers(CurrentLife);
     }
 }
