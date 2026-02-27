@@ -77,9 +77,10 @@
     <Compile Include="Assets\Script\IState.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyFactory.cs" />
     <Compile Include="Assets\Script\Enemy\States\AttackState.cs" />
+    <Compile Include="Assets\Script\Regeneration\WorldStateManager.cs" />
     <Compile Include="Assets\Script\Pool.cs" />
     <Compile Include="Assets\Script\Enemy\SpawnerEnemy.cs" />
-    <Compile Include="Assets\Script\WorldStateManager.cs" />
+    <Compile Include="Assets\Script\Regeneration\RegenerationTree.cs" />
     <Compile Include="Assets\Script\Enemy\States\DeadState.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyType.cs" />
   </ItemGroup>
