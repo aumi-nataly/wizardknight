@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5360718913500564128}
   - component: {fileID: 1897557197791511150}
+  - component: {fileID: 2224898049730975795}
   m_Layer: 0
   m_Name: LifeBonus
   m_TagString: Untagged
@@ -80,6 +81,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.64, y: 1.32}
   m_EdgeRadius: 0
+--- !u!114 &2224898049730975795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5393199022655516181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027fd2698b1646b4eb5a1e2c7909ab78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &6455200844603364655
 GameObject:
   m_ObjectHideFlags: 0

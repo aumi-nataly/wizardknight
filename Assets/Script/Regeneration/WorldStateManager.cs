@@ -6,11 +6,16 @@ public class WorldStateManager : MonoBehaviour
 {
     public static WorldStateManager Instance;
     private HashSet<int> DeadEnemy = new HashSet<int>();
+    private HashSet<int> СollectedBonus = new HashSet<int>();
+    private int SumLife;
+    private int SumMoney;
 
     private void Awake()
     {
         if (Instance == null)
         {
+            SumLife = 1;
+            SumMoney = 0;
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -18,6 +23,17 @@ public class WorldStateManager : MonoBehaviour
         {
          Destroy(gameObject);
         }
+
+    }
+
+    public void AddLife(int amount)
+    {
+        SumLife += amount;
+    }
+
+    public void AddMoney(int amount)
+    {
+        SumMoney += amount;
     }
 
     /// <summary>
@@ -31,6 +47,16 @@ public class WorldStateManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Добавить собранный бонус
+    /// </summary>
+    /// <param name="bonus"></param>
+    public void AddBonus(int bonus)
+    {
+        if (!СollectedBonus.Contains(bonus))
+            СollectedBonus.Add(bonus);
+    }
+
+    /// <summary>
     /// Проверить, мерт ли враг
     /// </summary>
     /// <param name="deadEnemy"></param>
@@ -38,9 +64,16 @@ public class WorldStateManager : MonoBehaviour
     public bool IsDeadEnemy(int deadEnemy)
     {  return DeadEnemy.Contains(deadEnemy); }
 
+    /// <summary>
+    /// Проверить, собран ли бонус
+    /// </summary>
+    /// <param name="bonus"></param>
+    /// <returns></returns>
+    public bool IsCollectedBonus(int bonus)
+    { return СollectedBonus.Contains(bonus); }
 
     /// <summary>
-    /// Перезагрузить мир
+    /// Перезагрузить мир, воскресить врагов, а бонусы - нет
     /// </summary>
     public void ResetWorld()
     {

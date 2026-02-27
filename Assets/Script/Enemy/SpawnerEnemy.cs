@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnerEnemy : MonoBehaviour
 {
     [SerializeField]
-    private EnemyFactory enemyFactory;  // Ссылка на фабрику
+    private EnemyFactory enemyFactory;  
 
     [SerializeField]
     private EnemyType spawnType;

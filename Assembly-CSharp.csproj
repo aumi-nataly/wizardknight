@@ -64,9 +64,12 @@
     <Compile Include="Assets\Script\Enemy\EnemyPoolData.cs" />
     <Compile Include="Assets\Script\CameraFollow.cs" />
     <Compile Include="Assets\Script\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Script\Bonus\BonusFactory.cs" />
     <Compile Include="Assets\Script\AudioManager.cs" />
     <Compile Include="Assets\Script\Enemy\States\IdleState.cs" />
     <Compile Include="Assets\Script\Player\FireBall.cs" />
+    <Compile Include="Assets\Script\Bonus\Bonus.cs" />
+    <Compile Include="Assets\Script\Bonus\BonusPoolData.cs" />
     <Compile Include="Assets\Script\StateMachine.cs" />
     <Compile Include="Assets\Script\Enemy\States\ApproachState.cs" />
     <Compile Include="Assets\Script\Player\PlayerHitted.cs" />
@@ -79,21 +82,19 @@
     <Compile Include="Assets\Script\Enemy\States\AttackState.cs" />
     <Compile Include="Assets\Script\Regeneration\WorldStateManager.cs" />
     <Compile Include="Assets\Script\Pool.cs" />
+    <Compile Include="Assets\Script\Bonus\SpawnerBonus.cs" />
     <Compile Include="Assets\Script\Enemy\SpawnerEnemy.cs" />
     <Compile Include="Assets\Script\Regeneration\RegenerationTree.cs" />
+    <Compile Include="Assets\Script\Bonus\BonusType.cs" />
     <Compile Include="Assets\Script\Enemy\States\DeadState.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\readme_ja.txt" />
-    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\03_man\Voice actor information.txt" />
     <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\04_woman\Voice actor information.txt" />
-    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\06_old_woman\Voice actor information.txt" />
     <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\readme_en.txt" />
-    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\05_old_man\Voice actor information.txt" />
     <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\02_girl\Voice actor information.txt" />
     <None Include="Assets\karsiori\Pixel Art Tree Pack\Pixel Art Tree Pack - Read Me.txt" />
-    <None Include="Assets\SparklingSoftwareLibrary\Sound\Voice\japanese\demo\General_Polite_01\01_boy\Voice actor information.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
