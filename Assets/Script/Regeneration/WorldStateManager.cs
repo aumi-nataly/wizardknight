@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WorldStateManager : MonoBehaviour
 {
+    [SerializeField]
+    private ScreenGameUI screen;
+
     public static WorldStateManager Instance;
     private HashSet<int> DeadEnemy = new HashSet<int>();
     private HashSet<int> СollectedBonus = new HashSet<int>();
@@ -35,6 +38,7 @@ public class WorldStateManager : MonoBehaviour
     public void AddMoney(int amount)
     {
         SumMoney += amount;
+        screen.UpdMoneyText(SumMoney);
     }
 
     /// <summary>
