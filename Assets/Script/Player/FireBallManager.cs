@@ -24,7 +24,7 @@ public class FireBallManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
-            Destroy(instance);
+            Destroy(gameObject);
 
         pool = gameObject.AddComponent<Pool>();
         fires = pool.CreatePool(fireballPrefab, SizePool);

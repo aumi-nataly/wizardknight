@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
-            Destroy(instance);
+            Destroy(gameObject);
 
         audioPlayerSource = gameObject.AddComponent<AudioSource>();
         audioPlayerSource.clip = jumpSoundClip;
