@@ -10,6 +10,13 @@ public class WorldStateManager : MonoBehaviour
     [SerializeField]
     private LifeUI lifeUI;
 
+    [SerializeField]
+    private GameObject player;
+
+
+    [SerializeField]
+    private GameObject tree;
+
     public static WorldStateManager Instance;
     private HashSet<int> DeadEnemy = new HashSet<int>();
     private HashSet<int> СollectedBonus = new HashSet<int>();
@@ -98,5 +105,12 @@ public class WorldStateManager : MonoBehaviour
         DeadEnemy.Clear();
         CurrentLife = MaxLifeHave;
         lifeUI.UpdateAmountLifeFlowers(CurrentLife);
+
+        player.transform.position = tree.transform.position;
+    }
+
+    public int GetCurrentMaxHealth()
+    {
+        return MaxLifeHave;
     }
 }

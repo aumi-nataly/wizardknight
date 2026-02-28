@@ -30,7 +30,8 @@ public class PlayerManager : MonoBehaviour
 
         if (PlayerHealth <= 0)
         {
-            Debug.Log("Конец игры");
+            WorldStateManager.Instance.ResetWorld();
+            PlayerHealth = WorldStateManager.Instance.GetCurrentMaxHealth();
         }
     }
 
