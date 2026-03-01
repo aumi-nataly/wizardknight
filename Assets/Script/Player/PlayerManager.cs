@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     private float PlayerHealth;
 
     [SerializeField]
@@ -24,9 +25,9 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void UpdateHealthPlayerAfterHit(float hit)
-    {
-        Hurt();
-        PlayerHealth -= hit;
+    {       
+       Hurt(Convert.ToInt32(hit));
+       var PlayerHealth = WorldStateManager.Instance.GetCurrentHealth();
 
         if (PlayerHealth <= 0)
         {
@@ -42,10 +43,10 @@ public class PlayerManager : MonoBehaviour
         return stateInfo.length;
     }
 
-    public void Hurt()
+    public void Hurt(int hit)
     {
         StartCoroutine(HurtWithAnimation());
-        WorldStateManager.Instance.MinusLife(1);
+        WorldStateManager.Instance.MinusLife(hit);
     }
 
     private IEnumerator HurtWithAnimation()

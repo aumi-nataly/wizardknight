@@ -113,4 +113,9 @@ public class WorldStateManager : MonoBehaviour
     {
         return MaxLifeHave;
     }
+
+    public int GetCurrentHealth()
+    {
+        return CurrentLife;
+    }
 }
