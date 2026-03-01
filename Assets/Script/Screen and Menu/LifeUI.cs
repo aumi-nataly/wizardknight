@@ -16,7 +16,7 @@ public class LifeUI : MonoBehaviour
 
     void Start()
     {
-        UpdateAmountLifeFlowers(1);
+        UpdateAmountLifeFlowers(WorldStateManager.Instance.GetCurrentMaxHealth());
     }
 
 

@@ -68,6 +68,7 @@
     <Compile Include="Assets\Script\AudioManager.cs" />
     <Compile Include="Assets\Script\Enemy\States\IdleState.cs" />
     <Compile Include="Assets\Script\Player\FireBall.cs" />
+    <Compile Include="Assets\Script\Bonus\ExitLevel.cs" />
     <Compile Include="Assets\Script\Bonus\Bonus.cs" />
     <Compile Include="Assets\Script\Screen and Menu\ScreenGameUI.cs" />
     <Compile Include="Assets\Script\Bonus\BonusPoolData.cs" />
@@ -84,9 +85,12 @@
     <Compile Include="Assets\Script\Enemy\States\AttackState.cs" />
     <Compile Include="Assets\Script\Regeneration\WorldStateManager.cs" />
     <Compile Include="Assets\Script\Pool.cs" />
+    <Compile Include="Assets\Script\Screen and Menu\PauseManager.cs" />
     <Compile Include="Assets\Script\Bonus\SpawnerBonus.cs" />
     <Compile Include="Assets\Script\Enemy\SpawnerEnemy.cs" />
+    <Compile Include="Assets\Script\Screen and Menu\ActionMenu.cs" />
     <Compile Include="Assets\Script\Regeneration\RegenerationTree.cs" />
+    <Compile Include="Assets\Script\LevelManager.cs" />
     <Compile Include="Assets\Script\Bonus\BonusType.cs" />
     <Compile Include="Assets\Script\Enemy\States\DeadState.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyType.cs" />

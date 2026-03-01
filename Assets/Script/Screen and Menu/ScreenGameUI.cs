@@ -11,7 +11,7 @@ public class ScreenGameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moneyText.text = "0";
+        moneyText.text = WorldStateManager.Instance.GetCurrentMoney().ToString();
     }
 
     public void UpdMoneyText(int value)

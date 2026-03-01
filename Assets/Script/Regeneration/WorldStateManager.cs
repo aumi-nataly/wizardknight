@@ -118,4 +118,9 @@ public class WorldStateManager : MonoBehaviour
     {
         return CurrentLife;
     }
+
+    public int GetCurrentMoney()
+    {
+        return SumMoney;
+    }
 }

@@ -52,3 +52,5 @@ MonoBehaviour:
   TreeSoundClip: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
   HappyGetLifeSoundClip: {fileID: 8300000, guid: c1c5fc641530f2348a4defb23bdd555f, type: 3}
   GetFlowerSoundClip: {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
+  MenuClickClip: {fileID: 8300000, guid: 7cc057bed53baf34799f52aab3c84800, type: 3}
+  ChangeLevelClip: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}

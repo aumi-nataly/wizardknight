@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -29,6 +30,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioClip GetFlowerSoundClip;
 
+    [SerializeField]
+    private AudioClip MenuClickClip;
+
+
+    [SerializeField]
+    private AudioClip ChangeLevelClip;
+
     private AudioSource audioPlayerSource;
     private AudioSource audioRunPlayerSource;
     private AudioSource audioEnemyDetectionSource;
@@ -37,6 +45,8 @@ public class AudioManager : MonoBehaviour
     private AudioSource TreeSource;
     private AudioSource HappyGetLifeSource;
     private AudioSource GetFlowerSource;
+    private AudioSource MenuClickSource;
+    private AudioSource ChangeLevelSource;
 
     public static AudioManager instance;
 
@@ -83,6 +93,9 @@ public class AudioManager : MonoBehaviour
         GetFlowerSource = gameObject.AddComponent<AudioSource>();
         GetFlowerSource.clip = GetFlowerSoundClip;
         GetFlowerSource.volume = 0.8f;
+
+        MenuClickSource = gameObject.AddComponent<AudioSource>();
+        MenuClickSource.clip = MenuClickClip;
 
     }
 
@@ -158,6 +171,22 @@ public class AudioManager : MonoBehaviour
         if (GetFlowerSource != null && GetFlowerSoundClip != null)
         {
             GetFlowerSource.PlayOneShot(GetFlowerSoundClip);
+        }
+    }
+
+    public void PlayMenuClick()
+    {
+        if (MenuClickSource != null && MenuClickClip != null)
+        {
+            MenuClickSource.PlayOneShot(MenuClickClip);
+        }
+    }
+
+    public void PlayChangeLevel()
+    {
+        if (ChangeLevelSource != null && ChangeLevelClip != null)
+        {
+            ChangeLevelSource.PlayOneShot(ChangeLevelClip);
         }
     }
 
