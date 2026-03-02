@@ -73,6 +73,7 @@
     <Compile Include="Assets\Script\Screen and Menu\ScreenGameUI.cs" />
     <Compile Include="Assets\Script\Bonus\BonusPoolData.cs" />
     <Compile Include="Assets\Script\StateMachine.cs" />
+    <Compile Include="Assets\Script\MainMenuManager.cs" />
     <Compile Include="Assets\Script\Enemy\States\ApproachState.cs" />
     <Compile Include="Assets\Script\Player\PlayerHitted.cs" />
     <Compile Include="Assets\Script\Player\FireBallManager.cs" />
