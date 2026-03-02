@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private bool JumpWithGround = false;
     private Vector2 Move;
     private Animator animator;
+    private bool isMovedPlatform;
 
     private void Awake()
     {
@@ -76,7 +77,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Moved()
     {
-        _rb.velocity = new Vector2(Speed * Move.x, _rb.velocity.y);
+        var vel = _rb.velocity;
+
+        if(!isMovedPlatform)
+          vel.x = Speed * Move.x;
+
+        _rb.velocity = vel;
     }
 
     void Jumped()
@@ -84,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
         if (JumpWithGround)
         {
             AudioManager.instance.PlayJumpPlayerSound();
-            _rb.velocity = new Vector2(_rb.velocity.x, JumpForce);
+            _rb.velocity = new Vector2(_rb.velocity.x, 0);
+            _rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
     }
 
@@ -153,6 +160,22 @@ public class PlayerMovement : MonoBehaviour
             // Движение влево, но объект не отражён — отражаем
             scale.x = -Mathf.Abs(scale.x);
             transform.localScale = scale;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("MovedPlatform"))
+        {
+            isMovedPlatform = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("MovedPlatform"))
+        {
+            isMovedPlatform = false;
         }
     }
 }

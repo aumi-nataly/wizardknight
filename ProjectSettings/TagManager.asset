@@ -8,6 +8,7 @@ TagManager:
   - Bonfire
   - Enemy
   - Abyss
+  - MovedPlatform
   layers:
   - Default
   - TransparentFX
