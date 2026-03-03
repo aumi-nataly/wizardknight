@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -52,5 +53,11 @@ public class PauseManager : MonoBehaviour
         Resume();
     }
 
-    
+
+    public void OnMainMenuPressed()
+    {
+        AudioManager.instance.PlayMenuClick();
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }
