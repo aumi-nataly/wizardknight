@@ -14,11 +14,21 @@ public class LifeUI : MonoBehaviour
 
     private List<GameObject> flowers = new List<GameObject>();
 
-    void Start()
+    private void OnEnable()
     {
+        WorldStateManager.Instance.OnLoadedWorldState += HandleStarted;
+    }
+
+    private void HandleStarted()
+    { 
         UpdateAmountLifeFlowers(WorldStateManager.Instance.GetCurrentMaxHealth());
     }
 
+    private void OnDisable()
+    {
+        if (WorldStateManager.Instance != null)
+            WorldStateManager.Instance.OnLoadedWorldState -= HandleStarted;
+    }
 
     public void UpdateAmountLifeFlowers(int sum)
     {

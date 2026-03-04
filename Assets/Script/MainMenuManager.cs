@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,16 +30,32 @@ public class MainMenuManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(firstDelectedButton);
     }
 
-    public void OnNewGamePressed()
+    public async void OnNewGamePressed()
     {
+        await SaveManager.ResetSaveToDefaultsAsync();
         AudioManager.instance.PlayMenuClick();
         LevelManager.instance.LoadNextLevel("Level_01");
     }
 
-    public void OnLoadPressed()
+    public async void OnLoadPressed()
     {
         AudioManager.instance.PlayMenuClick();
-       // LevelManager.instance.LoadNextLevel("Level_01");
+        try
+        {
+            var data = await SaveManager.LoadAsync();
+
+            if (data == null) 
+            {
+                return;
+            }
+            LevelManager.instance.LoadNextLevel(data.LevelName);
+
+        }
+        catch (Exception ex) 
+        {
+            Debug.LogError(ex);
+        }
+
     }
 
     public void OnInstructionPressed()
@@ -60,7 +77,7 @@ public class MainMenuManager : MonoBehaviour
         AudioManager.instance.PlayMenuClick();
         Menu.SetActive(true);
         InstructionMenu.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(instructionBackButton);
+        EventSystem.current.SetSelectedGameObject(firstDelectedButton);
     }
 
 }

@@ -8,11 +8,22 @@ public class ScreenGameUI : MonoBehaviour
     [SerializeField]
     private TMP_Text moneyText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        moneyText.text = WorldStateManager.Instance.GetCurrentMoney().ToString();
-    }
+  
+    //void OnEnable()
+    //{
+    //    WorldStateManager.Instance.OnLoadedWorldState += HandleStarted;
+    //}
+
+    //private void HandleStarted()
+    //{
+    //    moneyText.text = WorldStateManager.Instance.GetCurrentMoney().ToString();
+    //}
+
+    //private void OnDisable()
+    //{
+    //    if (WorldStateManager.Instance != null)
+    //        WorldStateManager.Instance.OnLoadedWorldState -= HandleStarted;
+    //}
 
     public void UpdMoneyText(int value)
     {

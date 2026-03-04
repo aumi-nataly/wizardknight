@@ -27,6 +27,11 @@ public class LevelManager : MonoBehaviour
         CurrentLevel = name;
     }
 
+    public string GetCurrentLevel()
+    {
+       return CurrentLevel;
+    }
+
     public void LoadNextLevel(string name)
     {
         SetCurrentLevel(name);

@@ -23,8 +23,30 @@ public class SpawnerEnemy : MonoBehaviour
 
     private Enemy concreteEnemy;
     private bool _isEnemyDead;
+    private bool _canWork;
 
-    // Метод для спавна врага
+    private void Start()
+    {
+        WorldStateManager.Instance.OnLoadedWorldState += HandleStarted;
+    }
+
+    private void OnDestroy()
+    {
+        if (WorldStateManager.Instance != null)
+            WorldStateManager.Instance.OnLoadedWorldState -= HandleStarted;
+    }
+
+    private void HandleStarted()
+    {
+        _canWork = true;
+    }
+
+
+
+
+    /// <summary>
+    /// Метод для спавна врага
+    /// </summary>
     private void SpawnEnemy()
     {
         if (enemyFactory == null)
@@ -54,7 +76,10 @@ public class SpawnerEnemy : MonoBehaviour
 
 
     void Update()
-    { 
+    {
+        if (!_canWork)
+            return;
+
         float dist = Vector2.Distance(transform.position, player.transform.position);
 
         if (dist < spawnDistance && enemy == null)

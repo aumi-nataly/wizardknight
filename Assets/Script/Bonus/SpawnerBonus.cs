@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Rendering.ShadowCascadeGUI;
 
 public class SpawnerBonus : MonoBehaviour
 {
@@ -23,7 +24,24 @@ public class SpawnerBonus : MonoBehaviour
 
     private Bonus concreteBonus;
     private bool _isCollected;
+    private bool _canWork;
 
+
+    private void Start()
+    {
+        WorldStateManager.Instance.OnLoadedWorldState += HandleStarted;
+    }
+
+    private void OnDestroy()
+    {
+        if(WorldStateManager.Instance !=null)
+            WorldStateManager.Instance.OnLoadedWorldState -= HandleStarted;
+    }
+
+    private void HandleStarted()
+    {
+        _canWork = true;
+    }
 
     private void SpawnBonus()
     {
@@ -53,6 +71,9 @@ public class SpawnerBonus : MonoBehaviour
 
     void Update()
     {
+        if (!_canWork)
+            return;
+
         float dist = Vector2.Distance(transform.position, player.transform.position);
 
         if (dist < spawnDistance && bonus == null)

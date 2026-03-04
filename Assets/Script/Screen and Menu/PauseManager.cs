@@ -54,8 +54,15 @@ public class PauseManager : MonoBehaviour
     }
 
 
-    public void OnMainMenuPressed()
+    public async void OnMainMenuPressed()
     {
+        string levelName = LevelManager.instance.GetCurrentLevel();
+        int countMoney = WorldStateManager.Instance.GetCurrentMoney();
+        int countLife = WorldStateManager.Instance.GetCurrentMaxHealth();
+        var collected = WorldStateManager.Instance.GetDictionaryCollectedBonus();
+
+        await SaveManager.SaveAsync(levelName, countMoney, countLife, collected);
+
         AudioManager.instance.PlayMenuClick();
         SceneManager.LoadScene("MainMenu");
     }

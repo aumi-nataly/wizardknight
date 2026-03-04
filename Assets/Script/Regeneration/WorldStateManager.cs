@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,22 +25,49 @@ public class WorldStateManager : MonoBehaviour
     private int SumMoney;
     private int MaxLifeHave;
 
-    private void Awake()
+    public event Action OnLoadedWorldState;
+
+    private async void Awake()
     {
         if (Instance == null)
         {
-            CurrentLife = 1;
-            MaxLifeHave = 1;
-            SumMoney = 0;
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+                CurrentLife = 1;
+                MaxLifeHave = 1;
+                SumMoney = 0;
+
+            var data = await SaveManager.LoadAsync();
+            if (data != null)
+            {
+
+                foreach (var item in data.СollectedBonus)
+                {
+                    AddBonus(item);
+                }
+                CurrentLife = data.CountLife;
+                MaxLifeHave = data.CountLife;
+                SumMoney = data.CountMoney;
+            }
+
+           // OnLoadedWorldState?.Invoke();
         }
-        else 
+        else
         {
-         Destroy(gameObject);
+            Destroy(gameObject);
         }
+
+        OnLoadedWorldState?.Invoke();
+       
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void Start()
+    {
+        screen.UpdMoneyText(SumMoney);
     }
 
     public void AddLife(int amount)
@@ -66,8 +94,8 @@ public class WorldStateManager : MonoBehaviour
     /// </summary>
     /// <param name="deadEnemy"></param>
     public void AddDeathEnemy(int deadEnemy)
-    { 
-        if (!DeadEnemy.Contains(deadEnemy)) 
+    {
+        if (!DeadEnemy.Contains(deadEnemy))
             DeadEnemy.Add(deadEnemy);
     }
 
@@ -87,7 +115,7 @@ public class WorldStateManager : MonoBehaviour
     /// <param name="deadEnemy"></param>
     /// <returns></returns>
     public bool IsDeadEnemy(int deadEnemy)
-    {  return DeadEnemy.Contains(deadEnemy); }
+    { return DeadEnemy.Contains(deadEnemy); }
 
     /// <summary>
     /// Проверить, собран ли бонус
@@ -114,6 +142,12 @@ public class WorldStateManager : MonoBehaviour
         return MaxLifeHave;
     }
 
+    public void SetCurrentAndMaxHealth(int life)
+    {
+        MaxLifeHave = life;
+        CurrentLife = life;
+    }
+
     public int GetCurrentHealth()
     {
         return CurrentLife;
@@ -122,5 +156,15 @@ public class WorldStateManager : MonoBehaviour
     public int GetCurrentMoney()
     {
         return SumMoney;
+    }
+
+    public void SetCurrentMoney(int money)
+    {
+        SumMoney = money;
+    }
+
+    public HashSet<int> GetDictionaryCollectedBonus()
+    {
+        return СollectedBonus;
     }
 }
