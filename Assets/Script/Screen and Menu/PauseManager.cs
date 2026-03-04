@@ -49,7 +49,7 @@ public class PauseManager : MonoBehaviour
 
     public void OnResumePressed()
     {
-        AudioManager.instance.PlayMenuClick();
+       // AudioManager.instance.PlayMenuClick();
         Resume();
     }
 
@@ -63,7 +63,7 @@ public class PauseManager : MonoBehaviour
 
         await SaveManager.SaveAsync(levelName, countMoney, countLife, collected);
 
-        AudioManager.instance.PlayMenuClick();
+     //   AudioManager.instance.PlayMenuClick();
         SceneManager.LoadScene("MainMenu");
     }
 

@@ -146,7 +146,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void GrowlEnemy()
     {
-        AudioManager.instance.PlayGrowlEnemy();
+       // AudioManager.instance.PlayGrowlEnemy();
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void SleepOff()
     {
-        AudioManager.instance.PlayDetectionEnemy();
+       // AudioManager.instance.PlayDetectionEnemy();
     }
 
     /// <summary>

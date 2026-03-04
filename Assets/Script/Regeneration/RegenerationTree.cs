@@ -46,7 +46,7 @@ public class RegenerationTree : MonoBehaviour
     {
         if (InteractionPress && playerIsNear)
         {
-            AudioManager.instance.PlayTreeLoader();
+          //  AudioManager.instance.PlayTreeLoader();
             WorldStateManager.Instance.ResetWorld();
         }
 

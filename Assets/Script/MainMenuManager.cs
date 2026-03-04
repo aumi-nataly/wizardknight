@@ -33,13 +33,13 @@ public class MainMenuManager : MonoBehaviour
     public async void OnNewGamePressed()
     {
         await SaveManager.ResetSaveToDefaultsAsync();
-        AudioManager.instance.PlayMenuClick();
+      //  AudioManager.instance.PlayMenuClick();
         LevelManager.instance.LoadNextLevel("Level_01");
     }
 
     public async void OnLoadPressed()
     {
-        AudioManager.instance.PlayMenuClick();
+      //  AudioManager.instance.PlayMenuClick();
         try
         {
             var data = await SaveManager.LoadAsync();
@@ -60,7 +60,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnInstructionPressed()
     {
-        AudioManager.instance.PlayMenuClick();
+      //  AudioManager.instance.PlayMenuClick();
         Menu.SetActive(false);
         InstructionMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(instructionBackButton);
@@ -68,13 +68,13 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnExitPressed()
     {
-        AudioManager.instance.PlayMenuClick();
+      //  AudioManager.instance.PlayMenuClick();
         Application.Quit();
     }
 
     public void OnInstructionBackPressed()
     {
-        AudioManager.instance.PlayMenuClick();
+      //  AudioManager.instance.PlayMenuClick();
         Menu.SetActive(true);
         InstructionMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(firstDelectedButton);

@@ -48,17 +48,19 @@ public class AudioManager : MonoBehaviour
     private AudioSource MenuClickSource;
     private AudioSource ChangeLevelSource;
 
-    public static AudioManager instance;
+ //   public static AudioManager instance;
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else
+        //    Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
 
         audioPlayerSource = gameObject.AddComponent<AudioSource>();
         audioPlayerSource.clip = jumpSoundClip;

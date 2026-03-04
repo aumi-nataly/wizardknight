@@ -49,7 +49,7 @@ public class ExitLevel : MonoBehaviour
     {
         if (InteractionPress && playerIsNear)
         {
-            AudioManager.instance.PlayChangeLevel();
+           // AudioManager.instance.PlayChangeLevel();
             LevelManager.instance.LoadNextLevel(NameNextLvl);
         }
 

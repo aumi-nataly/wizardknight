@@ -52,7 +52,7 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator HurtWithAnimation()
     {
         float animationLength = AnimationHurt();
-        AudioManager.instance.PlayPlayerHitted();
+      //  AudioManager.instance.PlayPlayerHitted();
         yield return new WaitForSeconds(animationLength);
 
         animator.SetBool("Hitted", false);

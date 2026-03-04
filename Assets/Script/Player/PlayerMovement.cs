@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using VContainer;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -25,6 +26,15 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 Move;
     private Animator animator;
     private bool isMovedPlatform;
+
+
+    private AudioManager _audio;
+
+    [Inject]
+    public void Construct(AudioManager audio)
+    {
+        _audio = audio;
+    }
 
     private void Awake()
     {
@@ -54,7 +64,8 @@ public class PlayerMovement : MonoBehaviour
         IsGrounded();
         JumpAnimation();
         Moved();
-        AudioManager.instance.PlayRunPlayerSound(Move.x, JumpWithGround);
+        // AudioManager.instance.PlayRunPlayerSound(Move.x, JumpWithGround);
+        _audio.PlayRunPlayerSound(Move.x, JumpWithGround);
         FlipCharacter();
         RunAnimation(); 
         Attack();
@@ -89,7 +100,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (JumpWithGround)
         {
-            AudioManager.instance.PlayJumpPlayerSound();
+            // AudioManager.instance.PlayJumpPlayerSound();
+            _audio.PlayJumpPlayerSound();
             _rb.velocity = new Vector2(_rb.velocity.x, 0);
             _rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }

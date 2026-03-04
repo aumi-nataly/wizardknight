@@ -17,11 +17,11 @@ public class Bonus : MonoBehaviour
         switch (type) 
         {
             case BonusType.BonusLife:
-                AudioManager.instance.PlayHappyGetLife();
+               // AudioManager.instance.PlayHappyGetLife();
                 WorldStateManager.Instance.AddLife(1);
                 break;
             case BonusType.BonusMoney:
-                AudioManager.instance.PlayGetFlower();
+             //   AudioManager.instance.PlayGetFlower();
                 WorldStateManager.Instance.AddMoney(1);
                 break;
             default:

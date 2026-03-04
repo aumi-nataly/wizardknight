@@ -14,9 +14,19 @@ public class LifeUI : MonoBehaviour
 
     private List<GameObject> flowers = new List<GameObject>();
 
-    private void OnEnable()
+    private void Start()
     {
-        WorldStateManager.Instance.OnLoadedWorldState += HandleStarted;
+        var world = WorldStateManager.Instance;
+
+        if (world.IsLoad)
+        {
+            HandleStarted();
+        }
+        else
+        {
+
+            WorldStateManager.Instance.OnLoadedWorldState += HandleStarted;
+        }
     }
 
     private void HandleStarted()

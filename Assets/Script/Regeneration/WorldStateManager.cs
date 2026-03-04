@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class WorldStateManager : MonoBehaviour
@@ -26,6 +27,7 @@ public class WorldStateManager : MonoBehaviour
     private int MaxLifeHave;
 
     public event Action OnLoadedWorldState;
+    public bool IsLoad;
 
     private async void Awake()
     {
@@ -58,17 +60,17 @@ public class WorldStateManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        IsLoad = true;
         OnLoadedWorldState?.Invoke();
-       
+        
+
+
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    private void Start()
-    {
-        screen.UpdMoneyText(SumMoney);
-    }
+
 
     public void AddLife(int amount)
     {
