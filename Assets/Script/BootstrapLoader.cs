@@ -12,7 +12,7 @@ public class BootstrapLoader : MonoBehaviour
 
     void Start()
     {
-        SceneManager.LoadScene("Level_01");
+        SceneManager.LoadScene("MainMenu");
 
     }
 

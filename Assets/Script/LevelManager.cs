@@ -5,20 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager instance;
-
     private string CurrentLevel;
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            CurrentLevel = "Level_01";
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
+
+        CurrentLevel = "Level_01";
+        DontDestroyOnLoad(gameObject);
+
     }
 
 
@@ -29,7 +23,7 @@ public class LevelManager : MonoBehaviour
 
     public string GetCurrentLevel()
     {
-       return CurrentLevel;
+        return CurrentLevel;
     }
 
     public void LoadNextLevel(string name)

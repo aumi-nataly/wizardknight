@@ -48,17 +48,8 @@ public class AudioManager : MonoBehaviour
     private AudioSource MenuClickSource;
     private AudioSource ChangeLevelSource;
 
- //   public static AudioManager instance;
-
     private void Awake()
     {
-        //if (instance == null)
-        //{
-        //    instance = this;
-        //    DontDestroyOnLoad(gameObject);
-        //}
-        //else
-        //    Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
 

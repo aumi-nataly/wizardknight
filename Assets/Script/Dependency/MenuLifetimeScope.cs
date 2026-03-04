@@ -1,10 +1,10 @@
 using VContainer;
 using VContainer.Unity;
 
-public class LevelLifetimeScope : LifetimeScope
+public class MenuLifetimeScope : LifetimeScope
 {
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterComponentInHierarchy<PlayerMovement>();
+        builder.RegisterComponentInHierarchy<MainMenuManager>();
     }
 }

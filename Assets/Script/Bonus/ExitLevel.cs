@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class ExitLevel : MonoBehaviour
 {
@@ -13,6 +14,17 @@ public class ExitLevel : MonoBehaviour
     private bool playerIsNear = false;
     private PlayerInputAction inputActions;
     private bool InteractionPress = false;
+
+    private AudioManager _audio;
+    private LevelManager _levelManager;
+
+    [Inject]
+    public void Construct(AudioManager audio, LevelManager levelManager)
+    {
+        _audio = audio;
+        _levelManager = levelManager;
+    }
+
 
     void OnEnable() => inputActions.Enable();
     void OnDisable() => inputActions.Disable();
@@ -49,8 +61,8 @@ public class ExitLevel : MonoBehaviour
     {
         if (InteractionPress && playerIsNear)
         {
-           // AudioManager.instance.PlayChangeLevel();
-            LevelManager.instance.LoadNextLevel(NameNextLvl);
+            _audio.PlayChangeLevel();
+            _levelManager.LoadNextLevel(NameNextLvl);
         }
 
         InteractionPress = false;

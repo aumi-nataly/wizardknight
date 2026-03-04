@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using VContainer;
 
 public class PauseManager : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class PauseManager : MonoBehaviour
 
     private PlayerInputAction input;
 
+    private AudioManager _audio;
+    private LevelManager _levelManager;
+
+    [Inject]
+    public void Construct(AudioManager audio, LevelManager levelManager)
+    {
+        _audio = audio;
+        _levelManager = levelManager;
+    }
     private void Awake()
     {
         input = new PlayerInputAction();
@@ -49,21 +59,21 @@ public class PauseManager : MonoBehaviour
 
     public void OnResumePressed()
     {
-       // AudioManager.instance.PlayMenuClick();
+        _audio.PlayMenuClick();
         Resume();
     }
 
 
     public async void OnMainMenuPressed()
     {
-        string levelName = LevelManager.instance.GetCurrentLevel();
+        string levelName = _levelManager.GetCurrentLevel();
         int countMoney = WorldStateManager.Instance.GetCurrentMoney();
         int countLife = WorldStateManager.Instance.GetCurrentMaxHealth();
         var collected = WorldStateManager.Instance.GetDictionaryCollectedBonus();
 
         await SaveManager.SaveAsync(levelName, countMoney, countLife, collected);
 
-     //   AudioManager.instance.PlayMenuClick();
+         _audio.PlayMenuClick();
         SceneManager.LoadScene("MainMenu");
     }
 
