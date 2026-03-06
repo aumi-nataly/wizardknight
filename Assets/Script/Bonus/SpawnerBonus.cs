@@ -6,7 +6,7 @@ using static UnityEditor.Rendering.ShadowCascadeGUI;
 
 public class SpawnerBonus : MonoBehaviour
 {
-    [SerializeField]
+
     private BonusFactory bonusFactory;
 
     [SerializeField]
@@ -25,31 +25,21 @@ public class SpawnerBonus : MonoBehaviour
 
     private Bonus concreteBonus;
     private bool _isCollected;
-    private bool _canWork;
+
+
 
     private WorldStateManager _worldStateManager;
+    private AudioManager _audioManager;
 
     [Inject]
-    public void Construct(WorldStateManager worldStateManager)
+    public void Construct(WorldStateManager worldStateManager, BonusFactory bonusFact, AudioManager audioManager)
     {
         _worldStateManager = worldStateManager;
-        Debug.Log("SpawnerBonus: WorldStateManager внедрён! - "+ SpawnerId);
+        bonusFactory = bonusFact;
+        _audioManager = audioManager;
     }
 
-    private void Start()
-    {
-        _worldStateManager.OnLoadedWorldState += HandleStarted;
-    }
-
-    private void OnDestroy()
-    {
-        _worldStateManager.OnLoadedWorldState -= HandleStarted;
-    }
-
-    private void HandleStarted()
-    {
-        _canWork = true;
-    }
+   
 
     private void SpawnBonus()
     {
@@ -66,6 +56,8 @@ public class SpawnerBonus : MonoBehaviour
         bonus.transform.position = transform.position;
 
         concreteBonus = bonus.GetComponent<Bonus>();
+        concreteBonus.Construct(_worldStateManager, _audioManager);
+
         _isCollected = false;
 
     }
@@ -77,10 +69,8 @@ public class SpawnerBonus : MonoBehaviour
     }
 
 
-    void Update()
+   public void MainTick()
     {
-        if (!_canWork)
-            return;
 
         float dist = Vector2.Distance(transform.position, player.transform.position);
 
