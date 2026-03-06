@@ -74,9 +74,10 @@ public class PauseManager : MonoBehaviour
         int countLife = _worldStateManager.GetCurrentMaxHealth();
         var collected = _worldStateManager.GetDictionaryCollectedBonus();
 
-        //  await SaveManager.SaveAsync(levelName, countMoney, countLife, collected);
+        await SaveManager.SaveAsync(levelName, countMoney, countLife, collected);
 
         _audio.PlayMenuClick();
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 

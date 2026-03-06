@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor.Rendering.Universal.ShaderGUI;
 using UnityEngine;
@@ -13,19 +14,10 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class WorldStateManager : MonoBehaviour
 {
-    //[SerializeField]
     private ScreenGameUI screen;
-
-    //[SerializeField]
     private LifeUI lifeUI;
-
-    //[SerializeField]
     private GameObject player;
-    //private PlayerMovement player;
-
-    // [SerializeField]
-     private GameObject tree;
-   // private RegenerationTree tree;
+    private GameObject tree;
 
     public static WorldStateManager Instance;
 
@@ -38,13 +30,6 @@ public class WorldStateManager : MonoBehaviour
     public event Action OnLoadedWorldState;
     public bool IsLoad;
 
-
-    //[Inject]
-    //public void Construct(ScreenGameUI sc, LifeUI l)
-    //{
-    //    screen = sc;
-    //    lifeUI = l;
-    //}
 
     //private async void Awake()
     //{
@@ -76,7 +61,7 @@ public class WorldStateManager : MonoBehaviour
     //    Cursor.visible = false;
     //}
 
-    private void Awake()
+    private async void Awake()
     {
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnLevelLoaded;
@@ -85,8 +70,26 @@ public class WorldStateManager : MonoBehaviour
         MaxLifeHave = 1;
         SumMoney = 0;
 
+        var data = await ReadDataFromFileAsync();
+        SetStartData(data);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void SetStartData(SaveData data)
+    {
+        if (data != null)
+        {
+
+            foreach (var item in data.СollectedBonus)
+            {
+                AddBonus(item);
+            }
+            CurrentLife = data.CountLife;
+            MaxLifeHave = data.CountLife;
+            SumMoney = data.CountMoney;
+        }
     }
 
     private void OnDestroy()
@@ -208,4 +211,15 @@ public class WorldStateManager : MonoBehaviour
         return СollectedBonus;
     }
 
+    private async Task<SaveData> ReadDataFromFileAsync()
+    {
+        var data = await SaveManager.LoadAsync();
+        return data;
+    }
+
+    public async Task RestartNewGame()
+    {
+        var data = await ReadDataFromFileAsync();
+        SetStartData(data);
+    }
 }

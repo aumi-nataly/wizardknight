@@ -23,12 +23,14 @@ public class MainMenuManager : MonoBehaviour
 
     private AudioManager _audio;
     private LevelManager _levelManager;
+    private WorldStateManager _worldStateManager;
 
     [Inject]
-    public void Construct(AudioManager audio, LevelManager levelManager)
+    public void Construct(AudioManager audio, LevelManager levelManager, WorldStateManager worldStateManager)
     {
         _audio = audio;
         _levelManager = levelManager;
+        _worldStateManager = worldStateManager;
     }
 
     private void Awake()
@@ -45,6 +47,7 @@ public class MainMenuManager : MonoBehaviour
     public async void OnNewGamePressed()
     {
         await SaveManager.ResetSaveToDefaultsAsync();
+        await _worldStateManager.RestartNewGame();
         _audio.PlayMenuClick();
         _levelManager.LoadNextLevel("Level_01");
     }

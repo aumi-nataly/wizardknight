@@ -12,7 +12,5 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<AudioManager>();
         builder.RegisterComponentInHierarchy<LevelManager>();
         
-       
-        Debug.Log("WorldStateManager зарегистрирован в контейнере");
     }
 }
