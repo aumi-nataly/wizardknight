@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -12,6 +13,16 @@ public class PlayerManager : MonoBehaviour
     private GameObject player;
     private PlayerHitted hitted;
     private Animator animator;
+
+    private WorldStateManager _worldStateManager;
+    private AudioManager _audioManager;
+
+    [Inject]
+    public void Construct(WorldStateManager worldStateManager, AudioManager audioManager)
+    {
+        _worldStateManager = worldStateManager;
+        _audioManager = audioManager;
+    }
 
     void Start()
     {
@@ -27,12 +38,12 @@ public class PlayerManager : MonoBehaviour
     private void UpdateHealthPlayerAfterHit(float hit)
     {       
        Hurt(Convert.ToInt32(hit));
-       var PlayerHealth = WorldStateManager.Instance.GetCurrentHealth();
+       var PlayerHealth = _worldStateManager.GetCurrentHealth();
 
         if (PlayerHealth <= 0)
         {
-            WorldStateManager.Instance.ResetWorld();
-            PlayerHealth = WorldStateManager.Instance.GetCurrentMaxHealth();
+            _worldStateManager.ResetWorld();
+            PlayerHealth = _worldStateManager.GetCurrentMaxHealth();
         }
     }
 
@@ -46,13 +57,13 @@ public class PlayerManager : MonoBehaviour
     public void Hurt(int hit)
     {
         StartCoroutine(HurtWithAnimation());
-        WorldStateManager.Instance.MinusLife(hit);
+        _worldStateManager.MinusLife(hit);
     }
 
     private IEnumerator HurtWithAnimation()
     {
         float animationLength = AnimationHurt();
-      //  AudioManager.instance.PlayPlayerHitted();
+        _audioManager.PlayPlayerHitted();
         yield return new WaitForSeconds(animationLength);
 
         animator.SetBool("Hitted", false);

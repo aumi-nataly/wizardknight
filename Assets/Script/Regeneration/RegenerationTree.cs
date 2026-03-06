@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class RegenerationTree : MonoBehaviour
 {
@@ -10,6 +11,16 @@ public class RegenerationTree : MonoBehaviour
     private bool playerIsNear = false;
     private PlayerInputAction inputActions;
     private bool InteractionPress = false;
+
+    private WorldStateManager _worldStateManager;
+    private AudioManager _audioManager;
+
+    [Inject]
+    public void Construct(WorldStateManager worldStateManager, AudioManager audioManager)
+    {
+        _worldStateManager = worldStateManager;
+        _audioManager = audioManager;
+    }
 
     void OnEnable() => inputActions.Enable();
     void OnDisable() => inputActions.Disable();
@@ -46,8 +57,8 @@ public class RegenerationTree : MonoBehaviour
     {
         if (InteractionPress && playerIsNear)
         {
-          //  AudioManager.instance.PlayTreeLoader();
-            WorldStateManager.Instance.ResetWorld();
+            _audioManager.PlayTreeLoader();
+            _worldStateManager.ResetWorld();
         }
 
         InteractionPress = false;

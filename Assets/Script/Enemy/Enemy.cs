@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
+using VContainer;
 
 public class Enemy : MonoBehaviour
 {
@@ -24,6 +25,14 @@ public class Enemy : MonoBehaviour
     private bool isDead;
     private bool _isReadyToDespawn;
 
+    private AudioManager _audioManager;
+
+    [Inject]
+    public void Construct( AudioManager audioManager)
+    {
+        _audioManager = audioManager;
+        Debug.Log($"Enemy: AudioManager = {audioManager != null}");
+    }
 
     private void Awake()
     {
@@ -146,7 +155,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void GrowlEnemy()
     {
-       // AudioManager.instance.PlayGrowlEnemy();
+       // _audioManager.PlayGrowlEnemy();
     }
 
     /// <summary>
@@ -154,7 +163,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void SleepOff()
     {
-       // AudioManager.instance.PlayDetectionEnemy();
+       // _audioManager.PlayDetectionEnemy();
     }
 
     /// <summary>

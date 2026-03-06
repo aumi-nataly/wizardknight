@@ -20,12 +20,15 @@ public class PauseManager : MonoBehaviour
 
     private AudioManager _audio;
     private LevelManager _levelManager;
+    private WorldStateManager _worldStateManager;
 
     [Inject]
-    public void Construct(AudioManager audio, LevelManager levelManager)
+    public void Construct(AudioManager audio, LevelManager levelManager, WorldStateManager worldStateManager)
     {
         _audio = audio;
         _levelManager = levelManager;
+        _worldStateManager = worldStateManager;
+        Debug.Log("PauseManager: WorldStateManager внедрён!");
     }
     private void Awake()
     {
@@ -67,13 +70,13 @@ public class PauseManager : MonoBehaviour
     public async void OnMainMenuPressed()
     {
         string levelName = _levelManager.GetCurrentLevel();
-        int countMoney = WorldStateManager.Instance.GetCurrentMoney();
-        int countLife = WorldStateManager.Instance.GetCurrentMaxHealth();
-        var collected = WorldStateManager.Instance.GetDictionaryCollectedBonus();
+        int countMoney = _worldStateManager.GetCurrentMoney();
+        int countLife = _worldStateManager.GetCurrentMaxHealth();
+        var collected = _worldStateManager.GetDictionaryCollectedBonus();
 
-        await SaveManager.SaveAsync(levelName, countMoney, countLife, collected);
+        //  await SaveManager.SaveAsync(levelName, countMoney, countLife, collected);
 
-         _audio.PlayMenuClick();
+        _audio.PlayMenuClick();
         SceneManager.LoadScene("MainMenu");
     }
 

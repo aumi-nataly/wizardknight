@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using VContainer;
 
 public class LifeUI : MonoBehaviour
 {
@@ -14,30 +15,37 @@ public class LifeUI : MonoBehaviour
 
     private List<GameObject> flowers = new List<GameObject>();
 
+    private WorldStateManager _worldStateManager;
+
+    [Inject]
+    public void Construct(WorldStateManager worldStateManager)
+    {
+        _worldStateManager = worldStateManager;
+        Debug.Log("LifeUI: WorldStateManager внедрён!");
+    }
+
     private void Start()
     {
-        var world = WorldStateManager.Instance;
-
-        if (world.IsLoad)
+       
+        if (_worldStateManager.IsLoad)
         {
             HandleStarted();
         }
         else
         {
 
-            WorldStateManager.Instance.OnLoadedWorldState += HandleStarted;
+            _worldStateManager.OnLoadedWorldState += HandleStarted;
         }
     }
 
     private void HandleStarted()
     { 
-        UpdateAmountLifeFlowers(WorldStateManager.Instance.GetCurrentMaxHealth());
+        UpdateAmountLifeFlowers(_worldStateManager.GetCurrentMaxHealth());
     }
 
     private void OnDisable()
     {
-        if (WorldStateManager.Instance != null)
-            WorldStateManager.Instance.OnLoadedWorldState -= HandleStarted;
+        _worldStateManager.OnLoadedWorldState -= HandleStarted;
     }
 
     public void UpdateAmountLifeFlowers(int sum)

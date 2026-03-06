@@ -1,25 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using UnityEditor.Rendering.Universal.ShaderGUI;
 using UnityEngine;
+using UnityEngine.Device;
+using UnityEngine.SceneManagement;
+using VContainer;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class WorldStateManager : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     private ScreenGameUI screen;
 
-    [SerializeField]
+    //[SerializeField]
     private LifeUI lifeUI;
 
-    [SerializeField]
+    //[SerializeField]
     private GameObject player;
+    //private PlayerMovement player;
 
-
-    [SerializeField]
-    private GameObject tree;
+    // [SerializeField]
+     private GameObject tree;
+   // private RegenerationTree tree;
 
     public static WorldStateManager Instance;
+
     private HashSet<int> DeadEnemy = new HashSet<int>();
     private HashSet<int> СollectedBonus = new HashSet<int>();
     private int CurrentLife;
@@ -29,48 +38,77 @@ public class WorldStateManager : MonoBehaviour
     public event Action OnLoadedWorldState;
     public bool IsLoad;
 
-    private async void Awake()
+
+    //[Inject]
+    //public void Construct(ScreenGameUI sc, LifeUI l)
+    //{
+    //    screen = sc;
+    //    lifeUI = l;
+    //}
+
+    //private async void Awake()
+    //{
+
+    //        DontDestroyOnLoad(gameObject);
+
+    //            CurrentLife = 1;
+    //            MaxLifeHave = 1;
+    //            SumMoney = 0;
+
+    //        var data = await SaveManager.LoadAsync();
+    //        if (data != null)
+    //        {
+
+    //            foreach (var item in data.СollectedBonus)
+    //            {
+    //                AddBonus(item);
+    //            }
+    //            CurrentLife = data.CountLife;
+    //            MaxLifeHave = data.CountLife;
+    //            SumMoney = data.CountMoney;
+    //        }
+
+    //    IsLoad = true;
+    //    OnLoadedWorldState?.Invoke();
+
+
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //    Cursor.visible = false;
+    //}
+
+    private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnLevelLoaded;
 
-                CurrentLife = 1;
-                MaxLifeHave = 1;
-                SumMoney = 0;
-
-            var data = await SaveManager.LoadAsync();
-            if (data != null)
-            {
-
-                foreach (var item in data.СollectedBonus)
-                {
-                    AddBonus(item);
-                }
-                CurrentLife = data.CountLife;
-                MaxLifeHave = data.CountLife;
-                SumMoney = data.CountMoney;
-            }
-
-           // OnLoadedWorldState?.Invoke();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        IsLoad = true;
-        OnLoadedWorldState?.Invoke();
-        
-
-
+        CurrentLife = 1;
+        MaxLifeHave = 1;
+        SumMoney = 0;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
+    private void OnDestroy()
+    {
+        Debug.Log("WorldStateManager уничтожен!");
+        SceneManager.sceneLoaded -= OnLevelLoaded;
+    }
 
+    private void OnLevelLoaded(Scene scene, LoadSceneMode mode) 
+    {
+
+        if (!scene.name.Contains("Level"))
+            return;
+
+        player = GameObject.FindWithTag("Player");
+        tree = GameObject.FindWithTag("Bonfire");
+        lifeUI = FindFirstObjectByType<LifeUI>();
+        screen = FindFirstObjectByType<ScreenGameUI>();
+
+        IsLoad = true;
+        OnLoadedWorldState?.Invoke();
+    }
 
     public void AddLife(int amount)
     {
@@ -169,4 +207,5 @@ public class WorldStateManager : MonoBehaviour
     {
         return СollectedBonus;
     }
+
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 using static UnityEditor.Rendering.ShadowCascadeGUI;
 
 public class SpawnerBonus : MonoBehaviour
@@ -26,16 +27,23 @@ public class SpawnerBonus : MonoBehaviour
     private bool _isCollected;
     private bool _canWork;
 
+    private WorldStateManager _worldStateManager;
+
+    [Inject]
+    public void Construct(WorldStateManager worldStateManager)
+    {
+        _worldStateManager = worldStateManager;
+        Debug.Log("SpawnerBonus: WorldStateManager внедрён! - "+ SpawnerId);
+    }
 
     private void Start()
     {
-        WorldStateManager.Instance.OnLoadedWorldState += HandleStarted;
+        _worldStateManager.OnLoadedWorldState += HandleStarted;
     }
 
     private void OnDestroy()
     {
-        if(WorldStateManager.Instance !=null)
-            WorldStateManager.Instance.OnLoadedWorldState -= HandleStarted;
+        _worldStateManager.OnLoadedWorldState -= HandleStarted;
     }
 
     private void HandleStarted()
@@ -51,7 +59,7 @@ public class SpawnerBonus : MonoBehaviour
             return;
         }
 
-        if (WorldStateManager.Instance.IsCollectedBonus(SpawnerId))
+        if (_worldStateManager.IsCollectedBonus(SpawnerId))
         { return; }
 
         bonus = bonusFactory.GetBonusFromPool(spawnType);
@@ -100,7 +108,7 @@ public class SpawnerBonus : MonoBehaviour
         if (_isCollected) return; // Уже обработан
 
         _isCollected = true;
-        WorldStateManager.Instance.AddBonus(SpawnerId);
+        _worldStateManager.AddBonus(SpawnerId);
         DespawnBonus();
     }
 }

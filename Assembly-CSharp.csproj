@@ -87,6 +87,7 @@
     <Compile Include="Assets\Script\Bonus\SpawnerBonus.cs" />
     <Compile Include="Assets\Script\Enemy\SpawnerEnemy.cs" />
     <Compile Include="Assets\Script\Screen and Menu\ActionMenu.cs" />
+    <Compile Include="Assets\Script\SpawnerManager.cs" />
     <Compile Include="Assets\Script\Regeneration\RegenerationTree.cs" />
     <Compile Include="Assets\Script\LevelManager.cs" />
     <Compile Include="Assets\Script\Bonus\BonusType.cs" />

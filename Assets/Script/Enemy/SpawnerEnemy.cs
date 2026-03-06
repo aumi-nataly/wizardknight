@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 public class SpawnerEnemy : MonoBehaviour
 {
-    [SerializeField]
     private EnemyFactory enemyFactory;  
 
     [SerializeField]
@@ -17,30 +18,22 @@ public class SpawnerEnemy : MonoBehaviour
     private GameObject player;
 
     [SerializeField]
-    private int SpawnerId;
+    public int SpawnerId;
 
     private GameObject enemy;
 
     private Enemy concreteEnemy;
     private bool _isEnemyDead;
-    private bool _canWork;
 
-    private void Start()
+    private WorldStateManager _worldStateManager;
+
+    [Inject]
+    public void Construct(WorldStateManager worldStateManager, EnemyFactory enemyFact)
     {
-        WorldStateManager.Instance.OnLoadedWorldState += HandleStarted;
+        _worldStateManager = worldStateManager;
+        enemyFactory = enemyFact;
     }
-
-    private void OnDestroy()
-    {
-        if (WorldStateManager.Instance != null)
-            WorldStateManager.Instance.OnLoadedWorldState -= HandleStarted;
-    }
-
-    private void HandleStarted()
-    {
-        _canWork = true;
-    }
-
+ 
 
 
 
@@ -56,7 +49,7 @@ public class SpawnerEnemy : MonoBehaviour
         }
 
         //не отображать мертвого врага, пока мир не перезагрузится
-        if (WorldStateManager.Instance.IsDeadEnemy(SpawnerId))
+        if (_worldStateManager.IsDeadEnemy(SpawnerId))
         { return; }
 
         enemy = enemyFactory.GetEnemyFromPool(spawnType);
@@ -75,10 +68,8 @@ public class SpawnerEnemy : MonoBehaviour
     }
 
 
-    void Update()
+    public void MainTick()
     {
-        if (!_canWork)
-            return;
 
         float dist = Vector2.Distance(transform.position, player.transform.position);
 
@@ -107,8 +98,7 @@ public class SpawnerEnemy : MonoBehaviour
         if (_isEnemyDead) return; // Уже обработан
 
         _isEnemyDead = true;
-        WorldStateManager.Instance.AddDeathEnemy(SpawnerId);
+        _worldStateManager.AddDeathEnemy(SpawnerId);
         DespawnEnemy();
-        Debug.Log("умер проивник номер "+ SpawnerId);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class EnemyFactory : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class EnemyFactory : MonoBehaviour
 
     private Pool poolData;
     public Dictionary<EnemyType,Queue<GameObject>> dicPoolEnemies = new Dictionary<EnemyType, Queue<GameObject>>();
+
+
 
     private void Awake()
     {
