@@ -9,11 +9,13 @@ public class SpawnerManager :IStartable, ITickable
     private readonly EnemyFactory enemyFactory;
     private readonly WorldStateManager worldStateManager;
     private  SpawnerEnemy[] _spawners;
+    private AudioManager _audioManager;
 
-    public SpawnerManager(EnemyFactory factory, WorldStateManager wsm)
+    public SpawnerManager(EnemyFactory factory, WorldStateManager wsm, AudioManager audioManager)
     {
         enemyFactory = factory;
         worldStateManager = wsm;
+        _audioManager = audioManager;
     }
     public void Start()
     {
@@ -21,7 +23,7 @@ public class SpawnerManager :IStartable, ITickable
        
         foreach (var spawner in _spawners)
         {
-            spawner.Construct(worldStateManager, enemyFactory);
+            spawner.Construct(worldStateManager, enemyFactory, _audioManager);
             spawner.MainTick();
         }
     }

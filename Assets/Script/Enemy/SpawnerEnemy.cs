@@ -26,12 +26,14 @@ public class SpawnerEnemy : MonoBehaviour
     private bool _isEnemyDead;
 
     private WorldStateManager _worldStateManager;
+    private AudioManager _audioManager;
 
     [Inject]
-    public void Construct(WorldStateManager worldStateManager, EnemyFactory enemyFact)
+    public void Construct(WorldStateManager worldStateManager, EnemyFactory enemyFact, AudioManager audioManager)
     {
         _worldStateManager = worldStateManager;
         enemyFactory = enemyFact;
+        _audioManager = audioManager;
     }
  
 
@@ -56,6 +58,8 @@ public class SpawnerEnemy : MonoBehaviour
         enemy.transform.position = transform.position;
 
         concreteEnemy = enemy.GetComponent<Enemy>();
+        concreteEnemy.Construct(_audioManager);
+
         _isEnemyDead = false;
 
     }

@@ -31,7 +31,6 @@ public class Enemy : MonoBehaviour
     public void Construct( AudioManager audioManager)
     {
         _audioManager = audioManager;
-        Debug.Log($"Enemy: AudioManager = {audioManager != null}");
     }
 
     private void Awake()
@@ -155,7 +154,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void GrowlEnemy()
     {
-       // _audioManager.PlayGrowlEnemy();
+        _audioManager.PlayGrowlEnemy();
     }
 
     /// <summary>
@@ -163,7 +162,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void SleepOff()
     {
-       // _audioManager.PlayDetectionEnemy();
+        _audioManager.PlayDetectionEnemy();
     }
 
     /// <summary>
