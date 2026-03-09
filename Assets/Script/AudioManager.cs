@@ -33,9 +33,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioClip MenuClickClip;
 
-
     [SerializeField]
     private AudioClip ChangeLevelClip;
+
+    [SerializeField]
+    private AudioClip FireBallClip;
 
     private AudioSource audioPlayerSource;
     private AudioSource audioRunPlayerSource;
@@ -47,6 +49,7 @@ public class AudioManager : MonoBehaviour
     private AudioSource GetFlowerSource;
     private AudioSource MenuClickSource;
     private AudioSource ChangeLevelSource;
+    private AudioSource FireBallSource;
 
     private void Awake()
     {
@@ -89,6 +92,9 @@ public class AudioManager : MonoBehaviour
 
         MenuClickSource = gameObject.AddComponent<AudioSource>();
         MenuClickSource.clip = MenuClickClip;
+
+        FireBallSource = gameObject.AddComponent<AudioSource>();
+        FireBallSource.clip = FireBallClip;
 
     }
 
@@ -180,6 +186,14 @@ public class AudioManager : MonoBehaviour
         if (ChangeLevelSource != null && ChangeLevelClip != null)
         {
             ChangeLevelSource.PlayOneShot(ChangeLevelClip);
+        }
+    }
+
+    public void PlayFireBall()
+    {
+        if (FireBallSource != null && FireBallClip != null)
+        {
+            FireBallSource.PlayOneShot(FireBallClip);
         }
     }
 

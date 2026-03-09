@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using VContainer;
 
 public class FireBall : MonoBehaviour
 {
@@ -16,16 +16,25 @@ public class FireBall : MonoBehaviour
 
     public static event Action<float, Enemy> FireBallHitted;
 
-    void Awake()
+    private FireBallManager _fireBallManager;
+
+    [Inject]
+    public void Construct(FireBallManager fireBallManager)
     {
- 
+        _fireBallManager = fireBallManager;
+        Debug.Log($"FireBall Construct: _fireBallManager = {_fireBallManager != null}");
     }
 
-    private void Start()
+   
+    private void OnEnable()
     {
-        // Запускаем таймер самоуничтожения
         Invoke("DestroyBall", lifeTime);
     }
+    private void OnDisable()
+    {
+        CancelInvoke();
+    }
+
 
     public void DirectionBall(float dir)
     {
@@ -44,7 +53,7 @@ public class FireBall : MonoBehaviour
 
         Enemy enemy = other.GetComponent<Enemy>();
         FireBallHitted?.Invoke(powerFire, enemy);
-        FireBallManager.instance.ReturnToPool(this);
+        _fireBallManager.ReturnToPool(this);
         
 
         // Отменяем таймер, если столкнулись с врагом
@@ -53,6 +62,6 @@ public class FireBall : MonoBehaviour
 
     private void DestroyBall()
     {
-        FireBallManager.instance.ReturnToPool(this);
+        _fireBallManager.ReturnToPool(this);
     }
 }

@@ -11,6 +11,6 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<WorldStateManager>();
         builder.RegisterComponentInHierarchy<AudioManager>();
         builder.RegisterComponentInHierarchy<LevelManager>();
-        
+        builder.RegisterComponentInHierarchy<FireBallManager>();
     }
 }

@@ -29,11 +29,14 @@ public class PlayerMovement : MonoBehaviour
 
 
     private AudioManager _audio;
+    private FireBallManager _fireBallManager;
 
     [Inject]
-    public void Construct(AudioManager audio)
+    public void Construct(AudioManager audio, FireBallManager fireBallManager)
     {
         _audio = audio;
+        _fireBallManager = fireBallManager;
+        Debug.Log($"PlayerMovement Start. FireBallManager = {_fireBallManager != null}");
     }
 
     private void Awake()
@@ -64,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
         IsGrounded();
         JumpAnimation();
         Moved();
-        // AudioManager.instance.PlayRunPlayerSound(Move.x, JumpWithGround);
         _audio.PlayRunPlayerSound(Move.x, JumpWithGround);
         FlipCharacter();
         RunAnimation(); 
@@ -76,15 +78,17 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("Attacking", AttackPress);
 
         if (AttackPress)
-        { 
-            var fire = FireBallManager.instance.GetFireBall(Mathf.Sign(transform.localScale.x));
-            
+        {
+            _audio.PlayFireBall();
+            Transform posFire = transform.Find("ForFire");
+            _fireBallManager.GetFireBall(Mathf.Sign(transform.localScale.x), posFire);
+
         }
         AttackPress = false;
-        
+
     }
 
-   
+
 
     void Moved()
     {
@@ -100,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (JumpWithGround)
         {
-            // AudioManager.instance.PlayJumpPlayerSound();
             _audio.PlayJumpPlayerSound();
             _rb.velocity = new Vector2(_rb.velocity.x, 0);
             _rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);

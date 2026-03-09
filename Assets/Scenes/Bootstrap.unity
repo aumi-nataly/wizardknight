@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 517409737}
   - component: {fileID: 517409738}
   - component: {fileID: 517409739}
+  - component: {fileID: 517409740}
   m_Layer: 0
   m_Name: LifetimeScope
   m_TagString: Untagged
@@ -162,6 +163,7 @@ MonoBehaviour:
   GetFlowerSoundClip: {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
   MenuClickClip: {fileID: 8300000, guid: 7cc057bed53baf34799f52aab3c84800, type: 3}
   ChangeLevelClip: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
+  FireBallClip: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
 --- !u!114 &517409735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,11 +231,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e29c6cb22b1f964c8260b50ba705fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screen: {fileID: 0}
-  lifeUI: {fileID: 0}
-  player: {fileID: 0}
-  tree: {fileID: 0}
   IsLoad: 0
+--- !u!114 &517409740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517409733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7e2a6901f042c429a91218f061c3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 643653291730074352, guid: 1bc6603e7c4316a4d82ecc501e27cc69, type: 3}
+  SizePool: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

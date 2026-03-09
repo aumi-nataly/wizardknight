@@ -19,7 +19,6 @@ public class WorldStateManager : MonoBehaviour
     private GameObject player;
     private GameObject tree;
 
-    public static WorldStateManager Instance;
 
     private HashSet<int> DeadEnemy = new HashSet<int>();
     private HashSet<int> СollectedBonus = new HashSet<int>();
@@ -29,37 +28,6 @@ public class WorldStateManager : MonoBehaviour
 
     public event Action OnLoadedWorldState;
     public bool IsLoad;
-
-
-    //private async void Awake()
-    //{
-
-    //        DontDestroyOnLoad(gameObject);
-
-    //            CurrentLife = 1;
-    //            MaxLifeHave = 1;
-    //            SumMoney = 0;
-
-    //        var data = await SaveManager.LoadAsync();
-    //        if (data != null)
-    //        {
-
-    //            foreach (var item in data.СollectedBonus)
-    //            {
-    //                AddBonus(item);
-    //            }
-    //            CurrentLife = data.CountLife;
-    //            MaxLifeHave = data.CountLife;
-    //            SumMoney = data.CountMoney;
-    //        }
-
-    //    IsLoad = true;
-    //    OnLoadedWorldState?.Invoke();
-
-
-    //    Cursor.lockState = CursorLockMode.Locked;
-    //    Cursor.visible = false;
-    //}
 
     private async void Awake()
     {

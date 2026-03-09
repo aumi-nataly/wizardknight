@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using VContainer.Unity;
 
 public class FireBallManager : MonoBehaviour
 {
@@ -10,38 +12,53 @@ public class FireBallManager : MonoBehaviour
 
     [SerializeField]
     private int SizePool;
-
-    private Pool pool;
     private Queue<GameObject> fires;
-    public static FireBallManager instance;
+
 
 
     private void Awake()
     {
-        if (instance == null)
+        fires = new Queue<GameObject>();
+        DontDestroyOnLoad(gameObject);
+  
+        for (int i = 0; i < SizePool; i++)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
+            var obj = Instantiate<GameObject>(fireballPrefab,transform);
+            LifetimeScope.Find<GameLifetimeScope>().Container.InjectGameObject(obj);
 
-        pool = gameObject.AddComponent<Pool>();
-        fires = pool.CreatePool(fireballPrefab, SizePool);
+            obj.gameObject.SetActive(false);
+            fires.Enqueue(obj);
+        }
     }
 
-    public GameObject GetFireBall(float dir)
+  
+    public GameObject GetFireBall(float dir,Transform playerPos)
     {
-        var fire = pool.GetFromPool(fires);
-        fire.transform.position = transform.position;
+
+        if (fires == null || fires.Count == 0)
+        {
+            Debug.LogError("FireBall пул не инициализирован или пуст!");
+            return null;
+        }
+
+       
+        var fire = fires.Dequeue();
+
+        fire.transform.position = playerPos.position;
+        fire.gameObject.SetActive(true);
+
         var script = fire.GetComponent<FireBall>();
         script.DirectionBall(dir);
 
         return fire;
     }
 
+
+
     public void ReturnToPool(FireBall fire)
     {
-        pool.ReturnToPool(fire.gameObject, fires);
+        fire.gameObject.SetActive(false);
+        fires.Enqueue(fire.gameObject);
     }
+
 }
