@@ -42,10 +42,7 @@ public class WorldStateManager : MonoBehaviour
         if (data != null)
         {
 
-            foreach (var item in data.СollectedBonus)
-            {
-                AddBonus(item);
-            }
+            data.СollectedBonus = null;
             CurrentLife = data.CountLife;
             MaxLifeHave = data.CountLife;
             SumMoney = data.CountMoney;
