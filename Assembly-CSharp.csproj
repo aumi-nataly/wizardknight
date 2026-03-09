@@ -93,6 +93,7 @@
     <Compile Include="Assets\Script\Bonus\SpawnerBonusManager.cs" />
     <Compile Include="Assets\Script\Bonus\BonusType.cs" />
     <Compile Include="Assets\Script\Enemy\States\DeadState.cs" />
+    <Compile Include="Assets\Script\Platform\EmptyFloor.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyType.cs" />
   </ItemGroup>
   <ItemGroup>

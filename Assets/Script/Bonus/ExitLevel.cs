@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -17,12 +18,14 @@ public class ExitLevel : MonoBehaviour
 
     private AudioManager _audio;
     private LevelManager _levelManager;
+    private WorldStateManager _worldStateManager;
 
     [Inject]
-    public void Construct(AudioManager audio, LevelManager levelManager)
+    public void Construct(AudioManager audio, LevelManager levelManager, WorldStateManager worldStateManager)
     {
         _audio = audio;
         _levelManager = levelManager;
+        _worldStateManager = worldStateManager;
     }
 
 
@@ -52,16 +55,28 @@ public class ExitLevel : MonoBehaviour
             playerIsNear = false;
     }
 
-    private void Update()
+    private async void Update()
     {
-        InteractionPlayer();
+        await InteractionPlayer();
     }
 
-    private void InteractionPlayer()
+    private async Task InteractionPlayer()
     {
         if (InteractionPress && playerIsNear)
         {
             _audio.PlayChangeLevel();
+
+
+            if (NameNextLvl == "MainMenu")
+            {
+                string levelName = _levelManager.GetCurrentLevel();
+                int countMoney = _worldStateManager.GetCurrentMoney();
+                int countLife = _worldStateManager.GetCurrentMaxHealth();
+                var collected = _worldStateManager.GetDictionaryCollectedBonus();
+
+                await SaveManager.SaveAsync(levelName, countMoney, countLife, collected);
+            }  
+            
             _levelManager.LoadNextLevel(NameNextLvl);
         }
 

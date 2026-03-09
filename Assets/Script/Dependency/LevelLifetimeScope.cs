@@ -18,6 +18,7 @@ public class LevelLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<LifeUI>();
         builder.RegisterComponentInHierarchy<ScreenGameUI>();
         builder.RegisterComponentInHierarchy<RegenerationTree>();
+        builder.RegisterComponentInHierarchy<EmptyFloor>();
         builder.RegisterEntryPoint<SpawnerManager>();
         builder.RegisterEntryPoint<SpawnerBonusManager>();
 
