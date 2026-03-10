@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 Move;
     private Animator animator;
     private bool isMovedPlatform;
-
+    private float _direction = 1;
 
     private AudioManager _audio;
     private FireBallManager _fireBallManager;
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _audio.PlayFireBall();
             Transform posFire = transform.Find("ForFire");
-            _fireBallManager.GetFireBall(Mathf.Sign(transform.localScale.x), posFire);
+            _fireBallManager.GetFireBall(_direction, posFire);
 
         }
         AttackPress = false;
@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
           vel.x = Speed * Move.x;
 
         _rb.velocity = vel;
+  
     }
 
     void Jumped()
@@ -169,12 +170,14 @@ public class PlayerMovement : MonoBehaviour
             // Движение вправо, но объект отражён — исправляем
             scale.x = Mathf.Abs(scale.x);
             transform.localScale = scale;
+            _direction = 1;
         }
         else if (Move.x < 0 && scale.x > 0)
         {
             // Движение влево, но объект не отражён — отражаем
             scale.x = -Mathf.Abs(scale.x);
             transform.localScale = scale;
+            _direction = -1;
         }
     }
 

@@ -22,7 +22,7 @@ public class FireBall : MonoBehaviour
     public void Construct(FireBallManager fireBallManager)
     {
         _fireBallManager = fireBallManager;
-        Debug.Log($"FireBall Construct: _fireBallManager = {_fireBallManager != null}");
+
     }
 
    
@@ -38,7 +38,7 @@ public class FireBall : MonoBehaviour
 
     public void DirectionBall(float dir)
     {
-        Speed = dir * Speed;
+        Speed = dir * Mathf.Abs(Speed);
     }
 
     void Update()
