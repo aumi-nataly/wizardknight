@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c55e68665ce45848a672b4eb2522d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Spine: {fileID: 1345247032961034409}
   MaxHealth: 6
   Speed: 3
   groundLayer:
@@ -166,6 +167,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe9f6acd2d5879a45897a3c86a4a5a2d, type: 3}
+--- !u!4 &1345247032961034409 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3095670421709023801, guid: fe9f6acd2d5879a45897a3c86a4a5a2d, type: 3}
+  m_PrefabInstance: {fileID: 4061473719802659472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4355917766535932129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 301201267919940209, guid: fe9f6acd2d5879a45897a3c86a4a5a2d, type: 3}

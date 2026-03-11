@@ -28,7 +28,6 @@ public class Pool : MonoBehaviour
     public GameObject GetFromPool(Queue<GameObject> pool) 
     { 
         var obj = pool.Dequeue();
-        Debug.Log($"GetFromPool obj ={ obj}");
 
         obj.gameObject.SetActive(true);
         return obj;

@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _audio = audio;
         _fireBallManager = fireBallManager;
-        Debug.Log($"PlayerMovement Start. FireBallManager = {_fireBallManager != null}");
     }
 
     private void Awake()

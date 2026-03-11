@@ -21,7 +21,6 @@ public class LifeUI : MonoBehaviour
     public void Construct(WorldStateManager worldStateManager)
     {
         _worldStateManager = worldStateManager;
-        Debug.Log("LifeUI: WorldStateManager внедрён!");
     }
 
     private void Start()

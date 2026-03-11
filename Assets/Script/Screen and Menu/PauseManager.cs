@@ -28,7 +28,6 @@ public class PauseManager : MonoBehaviour
         _audio = audio;
         _levelManager = levelManager;
         _worldStateManager = worldStateManager;
-        Debug.Log("PauseManager: WorldStateManager внедрён!");
     }
     private void Awake()
     {
@@ -69,10 +68,12 @@ public class PauseManager : MonoBehaviour
 
     public async void OnMainMenuPressed()
     {
+        _worldStateManager.ResetDeadEnemy();
         string levelName = _levelManager.GetCurrentLevel();
         int countMoney = _worldStateManager.GetCurrentMoney();
         int countLife = _worldStateManager.GetCurrentMaxHealth();
         var collected = _worldStateManager.GetDictionaryCollectedBonus();
+        
 
         await SaveManager.SaveAsync(levelName, countMoney, countLife, collected);
 

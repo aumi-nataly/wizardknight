@@ -5,6 +5,9 @@ using VContainer;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
+    private Transform Spine;
+
+    [SerializeField]
     private float MaxHealth;
 
     [SerializeField]
@@ -25,7 +28,7 @@ public class Enemy : MonoBehaviour
     private AudioManager _audioManager;
 
     [Inject]
-    public void Construct( AudioManager audioManager)
+    public void Construct(AudioManager audioManager)
     {
         _audioManager = audioManager;
     }
@@ -35,7 +38,7 @@ public class Enemy : MonoBehaviour
         _m = new StateMachine();
         animator = GetComponentInChildren<Animator>();
         CurrentHealth = MaxHealth;
-        
+
     }
 
 
@@ -47,7 +50,6 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable()
     {
-
         FireBall.FireBallHitted -= UpdateHealthEnemy;
     }
 
@@ -64,8 +66,8 @@ public class Enemy : MonoBehaviour
 
 
     private void UpdateHealthEnemy(float hit, Enemy targetEnemy)
-    {      
-        
+    {
+
         if (targetEnemy != this) return;
 
         CurrentHealth = CurrentHealth - hit;
@@ -93,7 +95,8 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void Die()
     {
-       StartCoroutine(DieWithAnimation());
+        StartCoroutine(DieWithAnimation());
+      
     }
 
     private IEnumerator DieWithAnimation()
@@ -103,6 +106,8 @@ public class Enemy : MonoBehaviour
 
         _isReadyToDespawn = true;
     }
+
+
 
     public bool IsReadyToDespawn() => _isReadyToDespawn;
 
@@ -140,7 +145,7 @@ public class Enemy : MonoBehaviour
         {
             Speed = Mathf.Abs(Speed);
         }
-        else 
+        else
         {
             Speed = -1 * Mathf.Abs(Speed);
         }
@@ -210,4 +215,5 @@ public class Enemy : MonoBehaviour
             transform.localScale = scale;
         }
     }
+
 }

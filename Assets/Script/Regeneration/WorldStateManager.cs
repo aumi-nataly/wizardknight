@@ -42,7 +42,8 @@ public class WorldStateManager : MonoBehaviour
         if (data != null)
         {
 
-            data.СollectedBonus = null;
+            DeadEnemy.Clear();
+            СollectedBonus.Clear();
             CurrentLife = data.CountLife;
             MaxLifeHave = data.CountLife;
             SumMoney = data.CountMoney;
@@ -178,5 +179,11 @@ public class WorldStateManager : MonoBehaviour
     {
         var data = await ReadDataFromFileAsync();
         SetStartData(data);
+    }
+
+
+    public void ResetDeadEnemy()
+    {
+        DeadEnemy.Clear();
     }
 }

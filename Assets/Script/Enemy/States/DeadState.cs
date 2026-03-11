@@ -16,12 +16,11 @@ public class DeadState : IState
     public void Enter()
     {
         _enemy.Die();
-      //  _enemy.IsDeadAndCanReturnPool(true);
     }
 
     public void Exit()
     {
-       
+
     }
 
     public void Tick()

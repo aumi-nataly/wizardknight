@@ -14,7 +14,6 @@ public class ScreenGameUI : MonoBehaviour
     public void Construct(WorldStateManager worldStateManager)
     {
         _worldStateManager = worldStateManager;
-        Debug.Log("ScreenGameUI: WorldStateManager внедрён!");
     }
 
     private void Start()

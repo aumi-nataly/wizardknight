@@ -18,7 +18,6 @@ public class Bonus : MonoBehaviour
     {
         _worldStateManager = worldStateManager;
         _audioManager = audioManager;
-        Debug.Log("Bonus: WorldStateManager внедрён! ");
     }
 
     private void OnTriggerEnter2D(Collider2D other)

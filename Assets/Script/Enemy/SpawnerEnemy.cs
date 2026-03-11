@@ -56,7 +56,7 @@ public class SpawnerEnemy : MonoBehaviour
 
         enemy = enemyFactory.GetEnemyFromPool(spawnType);
         enemy.transform.position = transform.position;
-
+      
         concreteEnemy = enemy.GetComponent<Enemy>();
         concreteEnemy.Construct(_audioManager);
 
