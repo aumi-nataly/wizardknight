@@ -36,4 +36,4 @@ Game name: Woodland
 * Singleton
 * ScriptableObjects
 * Fabric
-* Сохранение лучшего результата в файл *.json
+* Сохранение прогресса в файл *.json
